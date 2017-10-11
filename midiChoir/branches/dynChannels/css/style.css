@@ -125,7 +125,7 @@ input[type="image"] {
     text-align: center;
     width: auto;
     height: auto;
-    margin: 10px;
+    margin: 20px;
 }
 
 .center button {
@@ -191,6 +191,15 @@ input[type="image"] {
     visibility: hidden
 }
 
-#tempoSlide {
+.middle {
+    display:inline-block;
+    vertical-align: middle;
+}
 
+#tempoSpan {
+    width: 50px;
+}
+
+#SATBButtonsDiv div {
+    margin: 10px;
 }

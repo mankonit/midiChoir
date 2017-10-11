@@ -4,8 +4,8 @@ var forceSATB = [];
 var muteSATB = [];
 var channels = [];
 var bookmarkTime = 0;
-var Instrument = "acoustic_grand_piano"; //"acoustic_grand_piano"
-// "accordion"
+var Instrument = "acoustic_grand_piano"; //"acoustic_grand_piano" // "accordion"
+
 
 window.onload = function () {
 
@@ -20,7 +20,6 @@ window.onload = function () {
             x.innerHTML = "Status : " + state + " " + Math.floor(progress * 100) + "%";
         },
         onsuccess: function () {
-            //configureMidi();
             loaded();
         }
     });
@@ -45,7 +44,7 @@ function loadMusic() {
     var htmlSelectedOption = htmlOptions[htmlSelectedIndex];
     var channelsString = htmlSelectedOption.getAttribute("data-channels");
     channels = channelsString.split(".");
-    console.log(channels.length);
+    console.log("Number of channels : " + channels.length);
     forceSATB = new Array(channels.length);
     forceSATB.fill(0);
     muteSATB = new Array(channels.length);
@@ -170,7 +169,7 @@ var MIDIPlayerPercentage = function (player) {
 function setAllVol() {
     // si au moins un bleu : on ne laisse que les bleu
     if (forceSATB.includes(1)) {
-        for (i = 0; i < 4; i++) {
+        for (i = 0; i < channels.length; i++) {
             if (forceSATB[i] === 1) {
                 MIDI.setVolume(i, 127);
             } else {
@@ -180,7 +179,7 @@ function setAllVol() {
     }
     // si pas de bleu : on laisse tout sauf les rouges
     else {
-        for (i = 0; i < 4; i++) {
+        for (i = 0; i < channels.length; i++) {
             if (muteSATB[i] === 1) {
                 MIDI.setVolume(i, 0);
             } else {
@@ -232,8 +231,16 @@ function muteChannel(channel) {
 ;
 
 function updateTempoLabel(value) {
-    console.log(value);
     var d = document.getElementById("tempoSpan");
-    d.innerHTML = value;
+    d.innerHTML = value + "%";
+    if (value >= 0)
+        d.innerHTML = "+" + d.innerHTML;
 }
 ;
+
+function applyTempo() {
+    var tempoCorrection = document.getElementById("tempoSlide").value;
+    console.log("Apply tempo : " + tempoCorrection + "%");
+    MIDI.Player.timeWarp = 1 - tempoCorrection/100.0;
+    loadMusic();
+}

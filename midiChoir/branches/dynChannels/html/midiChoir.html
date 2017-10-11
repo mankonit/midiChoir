@@ -36,7 +36,6 @@
         <script src="../js/midichoir.js" type="text/javascript"></script>
     </head>
     <body class="body">
-
         <div class="loader"></div> 
         <div class="center loadable">
             <select id="musicSelect" onchange="loadMusic()">
@@ -47,11 +46,9 @@
                 <option value="Salve_Regina.mid" data-channels="S.A.T.B">Salve Regina</option>
                 <option value="es_ist_ein_ros.mid" data-channels="S.A.T.B">Es Ist Ein Ros Entsprungen</option>
                 <option value="shchedryk_rev.mid" data-channels="S.A.T.B">Shchedryk</option>
+                <option value="Hymne_v1.mid" data-channels="S1.S2.A.T.B">Hymne</option>
             </select> 
         </div>
-
-        
-
         <div class="player loadable">
             <div class="time-controls">
                 <span id="time1" class="time">0:00</span>
@@ -69,19 +66,20 @@
             </div>
         </div>
         <div id="tempoSlideDiv" class="center loadable">
-            <span>Tempo change : </span>
-            <input id="tempoSlide" type="range" min="-50" max="50" step="10" value="0" oninput="updateTempoLabel(this.value)">
-            <span id="tempoSpan">0</span>
-            <span>%</span>
+            <span class="middle" >Tempo : </span>
+            <input id="tempoSlide" class="middle" type="range" min="-50" max="50" step="10" value="0" oninput="updateTempoLabel(this.value)">
+            <span id="tempoSpan" class="middle" >+0%</span>
+            <input class="middle" type="image" src="../images/ok.png" alt="ok" onclick="applyTempo()"/>
         </div>
-        <div id="forceButtonsDiv" class="center loadable"></div>
-        <div id="muteButtonsDiv" class="center loadable"></div>
+        <div id="SATBButtonsDiv" class="center loadable">
+            <div id="forceButtonsDiv"></div>
+            <div id="muteButtonsDiv"></div>
+        </div>
         <div class="infos">
             <p id="message"></p>
             <p id="plugin"></p>
             <p id="format"></p>
             <p>mathiaskahn@2017</p>
         </div>
-
     </body>
 </html>
