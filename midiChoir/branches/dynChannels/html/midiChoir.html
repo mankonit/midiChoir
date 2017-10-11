@@ -37,17 +37,16 @@
     </head>
     <body class="body">
         
-         <div class="loader"></div> 
-        
+        <div class="loader"></div> 
         <div class="center loadable">
             <select id="musicSelect" onchange="loadMusic()">
                 <option value="">-</option>
-                <option value="An_Irish_Blessing-b.mid">An Irish Blessing</option>
-                <option value="Angelus_ad_pastores_ait_Gabrieli_rev.mid">Angelus Ad Pastores Ait</option>
-                <option value="NorthLightsB_rev.mid">Northern Lights</option>
-                <option value="Salve_Regina.mid">Salve Regina</option>
-                <option value="es_ist_ein_ros.mid">Es Ist Ein Ros Entsprungen</option>
-                <option value="shchedryk_rev.mid">Shchedryk</option>
+                <option value="An_Irish_Blessing-b.mid" data-channels="S.A.T.B">An Irish Blessing</option>
+                <option value="Angelus_ad_pastores_ait_Gabrieli_rev.mid" data-channels="S.A.T.B">Angelus Ad Pastores Ait</option>
+                <option value="NorthLightsB_rev.mid" data-channels="S.A.T.B">Northern Lights</option>
+                <option value="Salve_Regina.mid" data-channels="S.A.T.B">Salve Regina</option>
+                <option value="es_ist_ein_ros.mid" data-channels="S.A.T.B">Es Ist Ein Ros Entsprungen</option>
+                <option value="shchedryk_rev.mid" data-channels="S.A.T.B">Shchedryk</option>
             </select> 
         </div>
         <div class="player loadable">
@@ -67,18 +66,8 @@
                 <input type="image" src="../images/undo.png" alt="back" onclick="backToBookmark()"/>
             </div>
         </div>
-        <div class="center loadable">
-            <button id="btnForce0" onclick="forceChannel(0)">S+</button>
-            <button id="btnForce1" onclick="forceChannel(1)">A+</button>
-            <button id="btnForce2" onclick="forceChannel(2)">T+</button>
-            <button id="btnForce3" onclick="forceChannel(3)">B+</button>
-        </div>
-        <div class="center loadable">
-            <button id="btnMute0" onclick="muteChannel(0)">S-</button>
-            <button id="btnMute1" onclick="muteChannel(1)">A-</button>
-            <button id="btnMute2" onclick="muteChannel(2)">T-</button>
-            <button id="btnMute3" onclick="muteChannel(3)">B-</button>
-        </div>
+        <div id="forceButtonsDiv" class="center loadable"></div>
+        <div id="muteButtonsDiv" class="center loadable"></div>
         <div class="infos">
             <p id="message"></p>
             <p id="plugin"></p>
