@@ -78,6 +78,7 @@ function loadMusic() {
     //
     MIDI.Player.loadFile("../mid/" + filename, MIDI.Player.start);
     bookmarkTime = 0;
+    setAllVol();
     $("#bookmark").css({"visibility": "hidden"});
     MIDIPlayerPercentage(MIDI.Player);
 }
