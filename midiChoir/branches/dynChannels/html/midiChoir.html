@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Choir Helper - Eolides</title>
+        <link href="../css/style.css" rel="stylesheet" type="text/css" />
+        <!-- polyfill -->
+        <!-- shim -->
+        <script src="../inc/shim/Base64.js" type="text/javascript"></script>
+        <script src="../inc/shim/Base64binary.js" type="text/javascript"></script>
+        <script src="../inc/shim/WebAudioAPI.js" type="text/javascript"></script>
+        <script src="../inc/shim/WebMIDIAPI.js" type="text/javascript"></script>
+        <!-- jasmid package -->
+        <script src="../inc/jasmid/stream.js"></script>
+        <script src="../inc/jasmid/midifile.js"></script>
+        <script src="../inc/jasmid/replayer.js"></script>
+        <!-- midi.js package -->
+        <script src="../inc/midi/audioDetect.js" type="text/javascript"></script>
+        <script src="../inc/midi/gm.js" type="text/javascript"></script>
+        <script src="../inc/midi/loader.js" type="text/javascript"></script>
+        <script src="../inc/midi/plugin.audiotag.js" type="text/javascript"></script>
+        <script src="../inc/midi/plugin.webaudio.js" type="text/javascript"></script>
+        <script src="../inc/midi/plugin.webmidi.js" type="text/javascript"></script>
+        <script src="../inc/midi/player.js" type="text/javascript"></script>
+        <script src="../inc/midi/synesthesia.js" type="text/javascript"></script>
+        <!-- utils -->
+        <script src="../inc/util/dom_request_xhr.js" type="text/javascript"></script>
+        <script src="../inc/util/dom_request_script.js" type="text/javascript"></script>
+        <script src="../inc/util/jquery-3.2.1.min.js" type="text/javascript"></script>
+        <!-- includes -->
+        <script src="../inc/timer.js" type="text/javascript"></script>
+        <script src="../inc/colorspace.js" type="text/javascript"></script>
+        <script src="../inc/event.js" type="text/javascript"></script>
+        <!-- page script -->
+        <script src="../js/midichoir.js" type="text/javascript"></script>
+    </head>
+    <body class="body">
+        
+         <div class="loader"></div> 
+        
+        <div class="center loadable">
+            <select id="musicSelect" onchange="loadMusic()">
+                <option value="">-</option>
+                <option value="An_Irish_Blessing-b.mid">An Irish Blessing</option>
+                <option value="Angelus_ad_pastores_ait_Gabrieli_rev.mid">Angelus Ad Pastores Ait</option>
+                <option value="NorthLightsB_rev.mid">Northern Lights</option>
+                <option value="Salve_Regina.mid">Salve Regina</option>
+                <option value="es_ist_ein_ros.mid">Es Ist Ein Ros Entsprungen</option>
+                <option value="shchedryk_rev.mid">Shchedryk</option>
+            </select> 
+        </div>
+        <div class="player loadable">
+            <div class="time-controls">
+                <span id="time1" class="time">0:00</span>
+                <span id="capsule">
+                    <span id="cursor"></span>
+                    <span id="bookmark"></span>
+                    
+                </span>
+                <span id="time2" class="time" style="text-align: left;">-0:00</span>
+            </div>
+            <div class="play-buttons">
+                <input type="image" src="../images/media_pause.png" alt="pause" onclick="pausePlayStop()" id="pausePlayStop"/>
+                <input type="image" src="../images/media_stop.png" alt="stop" onclick="pausePlayStop(true)"/>
+                <input type="image" src="../images/bookmark.png" alt="bkmrk" onclick="setBookmark()"/>
+                <input type="image" src="../images/undo.png" alt="back" onclick="backToBookmark()"/>
+            </div>
+        </div>
+        <div class="center loadable">
+            <button id="btnForce0" onclick="forceChannel(0)">S+</button>
+            <button id="btnForce1" onclick="forceChannel(1)">A+</button>
+            <button id="btnForce2" onclick="forceChannel(2)">T+</button>
+            <button id="btnForce3" onclick="forceChannel(3)">B+</button>
+        </div>
+        <div class="center loadable">
+            <button id="btnMute0" onclick="muteChannel(0)">S-</button>
+            <button id="btnMute1" onclick="muteChannel(1)">A-</button>
+            <button id="btnMute2" onclick="muteChannel(2)">T-</button>
+            <button id="btnMute3" onclick="muteChannel(3)">B-</button>
+        </div>
+        <div class="infos">
+            <p id="message"></p>
+            <p id="plugin"></p>
+            <p id="format"></p>
+            <p>mathiaskahn@2017</p>
+        </div>
+        
+    </body>
+</html>
