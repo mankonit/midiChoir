@@ -230,3 +230,10 @@ function muteChannel(channel) {
         MIDI.Player.resume();
 }
 ;
+
+function updateTempoLabel(value) {
+    console.log(value);
+    var d = document.getElementById("tempoSpan");
+    d.innerHTML = value;
+}
+;
