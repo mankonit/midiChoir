@@ -33,6 +33,8 @@ function loaded() {
     x.innerHTML = "Plugin : " + MIDI.api;
     var x = document.getElementById("format");
     x.innerHTML = "Format : " + MIDI.__audioFormat;
+    var x = document.getElementById("musicSelect");
+    x.selectedIndex = 0;
 }
 ;
 
@@ -236,6 +238,8 @@ function updateTempoLabel(value) {
     d.innerHTML = value + "%";
     if (value >= 0)
         d.innerHTML = "+" + d.innerHTML;
+    var d = document.getElementById("tempoValidate");
+    d.src = "../images/ok_darkGreen.png";
 }
 ;
 
@@ -244,4 +248,6 @@ function applyTempo() {
     console.log("Apply tempo : " + tempoCorrection + "%");
     MIDI.Player.timeWarp = 1 - tempoCorrection/100.0;
     loadMusic();
+    var d = document.getElementById("tempoValidate");
+    d.src = "../images/ok.png";
 }
