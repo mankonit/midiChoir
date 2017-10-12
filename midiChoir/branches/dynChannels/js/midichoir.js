@@ -92,6 +92,7 @@ function configureMidi() {
     for (i=0; i<channels.length; i++) {
         MIDI.programChange(i, instrumentNumber);
     }
+    //MIDI.noteOn(0,50,1,0);
 }
 ;
 
