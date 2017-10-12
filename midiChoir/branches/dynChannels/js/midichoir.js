@@ -5,6 +5,7 @@ var muteSATB = [];
 var channels = [];
 var bookmarkTime = 0;
 var Instrument = "acoustic_grand_piano"; //"acoustic_grand_piano" // "accordion"
+var tempoCorrection = 0;
 
 
 window.onload = function () {
@@ -239,15 +240,23 @@ function updateTempoLabel(value) {
     if (value >= 0)
         d.innerHTML = "+" + d.innerHTML;
     var d = document.getElementById("tempoValidate");
-    d.src = "../images/ok_darkGreen.png";
+    if (value != tempoCorrection) {
+        d.src = "../images/ok_darkGreen.png";
+    }
+    else
+        d.src = "../images/ok.png";
 }
 ;
 
 function applyTempo() {
-    var tempoCorrection = document.getElementById("tempoSlide").value;
-    console.log("Apply tempo : " + tempoCorrection + "%");
-    MIDI.Player.timeWarp = 1 - tempoCorrection/100.0;
-    loadMusic();
-    var d = document.getElementById("tempoValidate");
-    d.src = "../images/ok.png";
+    var newTempo = document.getElementById("tempoSlide").value;
+    if (tempoCorrection != newTempo) {
+        tempoCorrection = newTempo;
+        console.log("Apply tempo : " + tempoCorrection + "%");
+        MIDI.Player.timeWarp = 1 - tempoCorrection/100.0;
+        loadMusic();
+        var d = document.getElementById("tempoValidate");
+        d.src = "../images/ok.png";
+    }
 }
+;
