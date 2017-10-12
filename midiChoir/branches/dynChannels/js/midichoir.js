@@ -9,7 +9,6 @@ var tempoCorrection = 0;
 
 
 window.onload = function () {
-
     MIDI.loadPlugin({
         soundfontUrl: "./soundfont/",
         instrument: Instrument,
@@ -39,6 +38,13 @@ function loaded() {
 }
 ;
 
+function changeTrack() {
+    document.getElementById("tempoSlide").value = 0;
+    applyTempo();
+    updateTempoLabel(0);
+    loadMusic();
+}
+;
 function loadMusic() {
     var htmlSelect = document.getElementById("musicSelect");
     var filename = htmlSelect.value;
@@ -79,10 +85,11 @@ function loadMusic() {
         htmlMuteButtonsDiv.appendChild(muteBut);
     }
     //
-    MIDI.Player.loadFile("../mid/" + filename, MIDI.Player.start);
     bookmarkTime = 0;
     setAllVol();
     $("#bookmark").css({"visibility": "hidden"});
+    $("#tempoSlideDiv").css({"visibility": "visible"});
+    MIDI.Player.loadFile("../mid/" + filename, MIDI.Player.start);
     MIDIPlayerPercentage(MIDI.Player);
 }
 ;
@@ -256,8 +263,9 @@ function applyTempo() {
         console.log("Apply tempo : " + tempoCorrection + "%");
         MIDI.Player.timeWarp = 1 - tempoCorrection/100.0;
         loadMusic();
-        var d = document.getElementById("tempoValidate");
-        d.src = "../images/ok.png";
+        updateTempoLabel(tempoCorrection);
     }
+    var d = document.getElementById("tempoValidate");
+    d.src = "../images/ok.png";
 }
 ;

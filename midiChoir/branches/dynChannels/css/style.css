@@ -203,3 +203,11 @@ input[type="image"] {
 #SATBButtonsDiv div {
     margin: 10px;
 }
+
+.center loadable {
+
+}
+
+#tempoSlideDiv {
+    visibility: hidden;
+}

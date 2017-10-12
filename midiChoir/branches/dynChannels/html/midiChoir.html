@@ -38,7 +38,7 @@
     <body class="body">
         <div class="loader"></div> 
         <div class="center loadable">
-            <select id="musicSelect" onchange="loadMusic()">
+            <select id="musicSelect" onchange="changeTrack()">
                 <option value="">-</option>
                 <option value="An_Irish_Blessing-b.mid" data-channels="S.A.T.B">An Irish Blessing</option>
                 <option value="Angelus_ad_pastores_ait_Gabrieli_rev.mid" data-channels="S.A.T.B">Angelus Ad Pastores Ait</option>
@@ -65,7 +65,7 @@
                 <input type="image" src="../images/undo.png" alt="back" onclick="backToBookmark()"/>
             </div>
         </div>
-        <div id="tempoSlideDiv" class="center loadable">
+        <div id="tempoSlideDiv" class="center">
             <span class="middle" >Tempo : </span>
             <input id="tempoSlide" class="middle" type="range" min="-50" max="50" step="10" value="0" oninput="updateTempoLabel(this.value)">
             <span id="tempoSpan" class="middle" >+0%</span>
