@@ -91,6 +91,8 @@ function loadMusic() {
     $("#tempoSlideDiv").css({"visibility": "visible"});
     MIDI.Player.loadFile("../mid/" + filename, MIDI.Player.start);
     MIDIPlayerPercentage(MIDI.Player);
+    var d = document.getElementById("pausePlayStop");
+    d.src = "../images/media_pause.png";
 }
 ;
 
