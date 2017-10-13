@@ -1,0 +1,9 @@
+- One voice per channel
+    - channel 0 : tempo & infos
+    - ch 1 : soprans
+    - ch 2 : alti
+    - ...
+
+- In each channel : change time of first event is = 0.000
+    - change to 0.001
+    - This to avoid problem of fisrt note not played
