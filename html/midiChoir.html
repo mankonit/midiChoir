@@ -36,18 +36,17 @@
         <script src="../js/midichoir.js" type="text/javascript"></script>
     </head>
     <body class="body">
-        
-         <div class="loader"></div> 
-        
+        <div class="loader"></div> 
         <div class="center loadable">
-            <select id="musicSelect" onchange="loadMusic()">
+            <select id="musicSelect" onchange="changeTrack()">
                 <option value="">-</option>
-                <option value="An_Irish_Blessing-b.mid">An Irish Blessing</option>
-                <option value="Angelus_ad_pastores_ait_Gabrieli_rev.mid">Angelus Ad Pastores Ait</option>
-                <option value="NorthLightsB_rev.mid">Northern Lights</option>
-                <option value="Salve_Regina.mid">Salve Regina</option>
-                <option value="es_ist_ein_ros.mid">Es Ist Ein Ros Entsprungen</option>
-                <option value="shchedryk_rev.mid">Shchedryk</option>
+                <option value="An_Irish_Blessing-b.mid" data-channels="S.A.T.B">An Irish Blessing</option>
+                <option value="Angelus_ad_pastores_ait_Gabrieli_rev.mid" data-channels="S.A.T.B">Angelus Ad Pastores Ait</option>
+                <option value="NorthLightsB_rev.mid" data-channels="S.A.T.B">Northern Lights</option>
+                <option value="Salve_Regina.mid" data-channels="S.A.T.B">Salve Regina</option>
+                <option value="es_ist_ein_ros.mid" data-channels="S.A.T.B">Es Ist Ein Ros Entsprungen</option>
+                <option value="shchedryk_rev.mid" data-channels="S.A.T.B">Shchedryk</option>
+                <option value="Hymne_v1.mid" data-channels="S1.S2.A.T.B">Hymne</option>
             </select> 
         </div>
         <div class="player loadable">
@@ -56,7 +55,6 @@
                 <span id="capsule">
                     <span id="cursor"></span>
                     <span id="bookmark"></span>
-                    
                 </span>
                 <span id="time2" class="time" style="text-align: left;">-0:00</span>
             </div>
@@ -67,17 +65,15 @@
                 <input type="image" src="../images/undo.png" alt="back" onclick="backToBookmark()"/>
             </div>
         </div>
-        <div class="center loadable">
-            <button id="btnForce0" onclick="forceChannel(0)">S+</button>
-            <button id="btnForce1" onclick="forceChannel(1)">A+</button>
-            <button id="btnForce2" onclick="forceChannel(2)">T+</button>
-            <button id="btnForce3" onclick="forceChannel(3)">B+</button>
+        <div id="tempoSlideDiv" class="center">
+            <span class="middle" >Tempo : </span>
+            <input id="tempoSlide" class="middle" type="range" min="-50" max="50" step="10" value="0" oninput="updateTempoLabel(this.value)">
+            <span id="tempoSpan" class="middle" >+0%</span>
+            <input id="tempoValidate" class="middle" type="image" src="../images/ok.png" alt="ok" onclick="applyTempo()"/>
         </div>
-        <div class="center loadable">
-            <button id="btnMute0" onclick="muteChannel(0)">S-</button>
-            <button id="btnMute1" onclick="muteChannel(1)">A-</button>
-            <button id="btnMute2" onclick="muteChannel(2)">T-</button>
-            <button id="btnMute3" onclick="muteChannel(3)">B-</button>
+        <div id="SATBButtonsDiv" class="center loadable">
+            <div id="forceButtonsDiv"></div>
+            <div id="muteButtonsDiv"></div>
         </div>
         <div class="infos">
             <p id="message"></p>
@@ -85,6 +81,5 @@
             <p id="format"></p>
             <p>mathiaskahn@2017</p>
         </div>
-        
     </body>
 </html>

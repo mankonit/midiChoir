@@ -1,4 +1,4 @@
-body {
+.body {
     background-color: #e0ebeb;
     font-family: sans-serif;
 }
@@ -125,7 +125,7 @@ input[type="image"] {
     text-align: center;
     width: auto;
     height: auto;
-    margin: 10px;
+    margin: 20px;
 }
 
 .center button {
@@ -189,4 +189,25 @@ input[type="image"] {
 
 .loadable {
     visibility: hidden
+}
+
+.middle {
+    display:inline-block;
+    vertical-align: middle;
+}
+
+#tempoSpan {
+    width: 50px;
+}
+
+#SATBButtonsDiv div {
+    margin: 10px;
+}
+
+.center loadable {
+
+}
+
+#tempoSlideDiv {
+    visibility: hidden;
 }
