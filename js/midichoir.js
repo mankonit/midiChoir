@@ -84,11 +84,18 @@ function loadMusic() {
         muteBut.appendChild(muteButText);
         htmlMuteButtonsDiv.appendChild(muteBut);
     }
+    // Ajout de l'aide sur les boutons
+    $("#btnForce0").attr("data-intro", "Mise en valeur de la voix");
+    $("#btnForce0").attr("data-position", "left");
+    $("#btnMute0").attr("data-intro", "Couper la voix");
+    $("#btnMute0").attr("data-position", "left");
     //
     bookmarkTime = 0;
     setAllVol();
     $("#bookmark").css({"visibility": "hidden"});
     $("#tempoSlideDiv").css({"visibility": "visible"});
+    $("#tempoLabel").attr("data-intro", "Ajustement du tempo");
+    $("#tempoLabel").attr("data-position", "left");
     MIDI.Player.loadFile("../mid/" + filename, MIDI.Player.start);
     MIDIPlayerPercentage(MIDI.Player);
     var d = document.getElementById("pausePlayStop");
