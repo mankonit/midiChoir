@@ -187,18 +187,20 @@ function setAllVol() {
             if (forceSATB[i] === 1) {
                 MIDI.setVolume(i, 127);
             } else {
-                MIDI.setVolume(i, 0);
+                MIDI.setVolume(i, 30);
             }
         }
     }
-    // si pas de bleu : on laisse tout sauf les rouges
+    // si pas de bleu : tout au max
     else {
         for (i = 0; i < channels.length; i++) {
-            if (muteSATB[i] === 1) {
-                MIDI.setVolume(i, 0);
-            } else {
-                MIDI.setVolume(i, 127);
-            }
+            MIDI.setVolume(i, 127);
+        }
+    }
+    // On coupe les rouges
+    for (i = 0; i < channels.length; i++) {
+        if (muteSATB[i] === 1) {
+            MIDI.setVolume(i, 0);
         }
     }
 }
