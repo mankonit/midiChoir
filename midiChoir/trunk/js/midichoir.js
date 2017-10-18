@@ -194,7 +194,7 @@ function setAllVol() {
             if (forceSATB[i] === 1) {
                 MIDI.setVolume(i, 127);
             } else {
-                MIDI.setVolume(i, 30);
+                MIDI.setVolume(i, 20);
             }
         }
     }
