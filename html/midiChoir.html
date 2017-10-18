@@ -55,18 +55,18 @@
         </div>
         <div class="player loadable">
             <div class="time-controls">
-                <span id="time1" class="time">0:00</span>
-                <span id="capsule">
+                <span id="time1" class="time" data-intro="Contrôle de l'avancement" data-position="left">0:00</span>
+                <span id="capsule" data-intro="" data-position="none">
                     <span id="cursor"></span>
                     <span id="bookmark"></span>
                 </span>
                 <span id="time2" class="time" style="text-align: left;">-0:00</span>
             </div>
             <div class="play-buttons">
-                <input type="image" id="pausePlayStop" src="../images/media_pause.png" alt="pause" onclick="pausePlayStop()" data-intro="Play / pause" data-position="left"/>
-                <input type="image" src="../images/media_stop.png" alt="stop" onclick="pausePlayStop(true)" data-intro="Stop" data-position="bottom"/>
-                <input type="image" src="../images/bookmark.png" alt="bkmrk" onclick="setBookmark()" data-intro="Positioner marque page" data-position="bottom"/>
-                <input type="image" src="../images/undo.png" alt="back" onclick="backToBookmark()" data-intro="Retour au marque-page" data-position="right" />
+                <input type="image" id="pausePlayStop" src="../images/media_pause.png" alt="pause" onclick="pausePlayStop()" data-intro="Play / Pause / Stop" data-position="left"/>
+                <input type="image" src="../images/media_stop.png" alt="stop" onclick="pausePlayStop(true)" data-intro="" data-position="none"/>
+                <input type="image" src="../images/bookmark.png" alt="bkmrk" onclick="setBookmark()" data-intro="" data-position="none"/>
+                <input type="image" src="../images/undo.png" alt="back" onclick="backToBookmark()" data-intro="Mettre signet / Retour" data-position="right" />
             </div>
         </div>
         <div id="tempoSlideDiv" class="center">
