@@ -85,7 +85,7 @@ function loadMusic() {
         htmlMuteButtonsDiv.appendChild(muteBut);
     }
     // Ajout de l'aide sur les boutons
-    $("#btnForce0").attr("data-intro", "Forcer la voix");
+    $("#btnForce0").attr("data-intro", "Isoler la voix");
     $("#btnForce0").attr("data-position", "left");
     $("#btnMute0").attr("data-intro", "Couper la voix");
     $("#btnMute0").attr("data-position", "left");
