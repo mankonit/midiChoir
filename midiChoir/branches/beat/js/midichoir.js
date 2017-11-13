@@ -1,6 +1,7 @@
 /* global forceSATB, MIDI, muteSATB, eventjs */
 
 var forceSATB = [];
+var playBeat = false;
 var muteSATB = [];
 var channels = [];
 var bookmarkTime = 0;
@@ -95,7 +96,7 @@ function loadMusic() {
     setAllVol();
     $("#bookmark").css({"visibility": "hidden"});
     $("#tempoSlideDiv").css({"visibility": "visible"});
-    $("#beatTempoDiv").css({"visibility": "visible"});
+    $("#playBeatDiv").css({"visibility": "visible"});
     $("#tempoLabel").attr("data-intro", "Ajustement du tempo");
     $("#tempoLabel").attr("data-position", "left");
     MIDI.Player.loadFile("../mid/" + filename, MIDI.Player.start);
@@ -106,12 +107,12 @@ function loadMusic() {
 ;
 
 function configureMidi() {
-    var instrumentNumber = MIDI.GM.byName[InstrumentBeat].number;
+    var instrumentNumber = MIDI.GM.byName[Instrument].number;
     for (i=0; i<channels.length; i++) {
         MIDI.programChange(i, instrumentNumber);
     }
     // Pour le channel beat tempo
-    console.log(MIDI.GM.byName[InstrumentBeat].number);
+    //console.log(MIDI.GM.byName[InstrumentBeat].number);
     MIDI.programChange(12, MIDI.GM.byName[InstrumentBeat].number);
     //MIDI.noteOn(0,50,1,0);
 }
@@ -193,23 +194,20 @@ var MIDIPlayerPercentage = function (player) {
 };
 
 function setAllVol() {
-    // channel tempo
-    MIDI.setVolume(12, 127);
-    
     // si au moins un bleu : on ne laisse que les bleu
     if (forceSATB.includes(1)) {
         for (i = 0; i < channels.length; i++) {
             if (forceSATB[i] === 1) {
-                MIDI.setVolume(i, 127);
+                MIDI.setVolume(i, 60);
             } else {
-                MIDI.setVolume(i, 20);
+                MIDI.setVolume(i, 10);
             }
         }
     }
     // si pas de bleu : tout au max
     else {
         for (i = 0; i < channels.length; i++) {
-            MIDI.setVolume(i, 127);
+            MIDI.setVolume(i, 60);
         }
     }
     // On coupe les rouges
@@ -218,6 +216,26 @@ function setAllVol() {
             MIDI.setVolume(i, 0);
         }
     }
+    // play beat
+    
+    if (playBeat) {
+       MIDI.setVolume(12, 127); 
+       console.log("play beat");
+    } 
+    else {
+        MIDI.setVolume(12, 0);
+        console.log("stop beat");
+    }
+}
+;
+
+function changePlayBeat() {
+    var wasPlaying = MIDI.Player.playing;
+    playBeat = $("#playBeat").prop("checked");
+    MIDI.Player.pause();
+    setAllVol();
+    if (wasPlaying)
+        MIDI.Player.resume();
 }
 ;
 
