@@ -86,6 +86,9 @@ function loadMusic() {
         muteBut.appendChild(muteButText);
         htmlMuteButtonsDiv.appendChild(muteBut);
     }
+    // on décoche le play beat
+    $("#playBeat").prop("checked", false);
+    
     // Ajout de l'aide sur les boutons
     $("#btnForce0").attr("data-intro", "Isoler la voix");
     $("#btnForce0").attr("data-position", "left");
@@ -94,6 +97,7 @@ function loadMusic() {
     //
     bookmarkTime = 0;
     setAllVol();
+    setBeatVol();
     $("#bookmark").css({"visibility": "hidden"});
     $("#tempoSlideDiv").css({"visibility": "visible"});
     $("#playBeatDiv").css({"visibility": "visible"});
@@ -112,7 +116,6 @@ function configureMidi() {
         MIDI.programChange(i, instrumentNumber);
     }
     // Pour le channel beat tempo
-    //console.log(MIDI.GM.byName[InstrumentBeat].number);
     MIDI.programChange(12, MIDI.GM.byName[InstrumentBeat].number);
     //MIDI.noteOn(0,50,1,0);
 }
@@ -216,8 +219,12 @@ function setAllVol() {
             MIDI.setVolume(i, 0);
         }
     }
+}
+;
+
+function setBeatVol() {
     // play beat
-    
+    playBeat = $("#playBeat").prop("checked");
     if (playBeat) {
        MIDI.setVolume(12, 127); 
        console.log("play beat");
@@ -231,9 +238,8 @@ function setAllVol() {
 
 function changePlayBeat() {
     var wasPlaying = MIDI.Player.playing;
-    playBeat = $("#playBeat").prop("checked");
     MIDI.Player.pause();
-    setAllVol();
+    setBeatVol();
     if (wasPlaying)
         MIDI.Player.resume();
 }
