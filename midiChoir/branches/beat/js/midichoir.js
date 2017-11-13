@@ -1,7 +1,8 @@
 /* global forceSATB, MIDI, muteSATB, eventjs */
 
-var forceSATB = [];
+var beatPresent = false;
 var playBeat = false;
+var forceSATB = [];
 var muteSATB = [];
 var channels = [];
 var bookmarkTime = 0;
@@ -60,6 +61,16 @@ function loadMusic() {
     forceSATB.fill(0);
     muteSATB = new Array(channels.length);
     muteSATB.fill(0);
+    var beatPresentString = htmlSelectedOption.getAttribute("data-beat");
+    if (beatPresentString === "1") {
+        beatPresent = true;
+        $("#playBeatDiv").css({"display": "block"});
+    }
+    else {
+        beatPresent = false;
+        $("#playBeatDiv").css({"display": "none"});
+    }
+    console.log(beatPresent);
     //
     configureMidi();
     //
@@ -86,6 +97,7 @@ function loadMusic() {
         muteBut.appendChild(muteButText);
         htmlMuteButtonsDiv.appendChild(muteBut);
     }
+
     // on décoche le play beat
     $("#playBeat").prop("checked", false);
     
