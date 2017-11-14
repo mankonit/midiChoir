@@ -44,10 +44,11 @@
                 <option value="">-</option>
                 <option value="come_again.mid" data-channels="S.A.T.B">Come Again</option>
                 <option value="Robledo_hoc_corpus.mid" data-channels="S.A.T.B">Hoc Corpus</option>
-                <option value="come_heavy_sleep.mid" data-channels="S.A.T.B">Come Heavy Sleep</option>
+                <option value="come_heavy_sleep.mid" data-channels="S.A.T.B" data-beat="1">Come Heavy Sleep</option>
                 <option value="couperin_respice_in_me.mid" data-channels="A.B">Couperin - Respice In Me</option>
-                <option value="Mutiis-Confige.mid" data-channels="A.B">Mutiis - Confinge Timore Tuo</option>
-                <option value="HappyBirthday.mid" data-channels="S.A.B">Joyeux Anniversaire</option>
+                <option value="Mutiis-Confige.mid" data-channels="A.B" data-beat="1">Mutiis - Confinge Timore Tuo</option>
+                <option value="HappyBirthday.mid" data-channels="S.A.B" data-beat="1">Joyeux Anniversaire</option>
+                <option value="Angelus_ad_pastores_ait_Gabrieli_rev.mid" data-channels="S.A.T.B" data-beat="1">Angelus Ad Pastores Ait</option>
                 <option value="BEETHOVEN_n9.mid" data-channels="S.A.T.B">Beethoven - n9</option>
             </select> 
         </div>
@@ -67,11 +68,16 @@
                 <input type="image" src="../images/undo.png" alt="back" onclick="backToBookmark()" data-intro="Mettre signet / Retour" data-position="right" />
             </div>
         </div>
+        <div id="playBeatDiv" class="center">
+            <span id="playBeatLabel" class="middle">Battre le tempo : </span>
+            <input id="playBeat2" class="middle" type="image" src="../images/metronome_black_48.png" alt="beat" onclick="changePlayBeat()"/>
+        </div>
         <div id="tempoSlideDiv" class="center">
             <span id="tempoLabel" class="middle">Tempo : </span>
             <input id="tempoSlide" class="middle" type="range" min="-50" max="50" step="10" value="0" oninput="updateTempoLabel(this.value)">
             <span id="tempoSpan" class="middle" >+0%</span>
             <input id="tempoValidate" class="middle" type="image" src="../images/ok.png" alt="ok" onclick="applyTempo()"/>
+            
         </div>
         <div id="SATBButtonsDiv" class="center loadable">
             <div id="forceButtonsDiv"></div>
