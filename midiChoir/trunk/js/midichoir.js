@@ -1,17 +1,19 @@
 /* global forceSATB, MIDI, muteSATB, eventjs */
 
+var playBeat = false;
 var forceSATB = [];
 var muteSATB = [];
 var channels = [];
 var bookmarkTime = 0;
 var Instrument = "acoustic_grand_piano"; //"acoustic_grand_piano" // "accordion"
+var InstrumentBeat = "xylophone";
 var tempoCorrection = 0;
 
 
 window.onload = function () {
     MIDI.loadPlugin({
         soundfontUrl: "./soundfont/",
-        instrument: Instrument,
+        instruments: [Instrument, InstrumentBeat],
         //targetFormat: 'mp3', // mp3 / ogg
         api: 'webaudio', // audiotag / webmidi / webaudio
         onprogress: function (state, progress) {
@@ -58,6 +60,12 @@ function loadMusic() {
     forceSATB.fill(0);
     muteSATB = new Array(channels.length);
     muteSATB.fill(0);
+    var beatPresentString = htmlSelectedOption.getAttribute("data-beat");
+    if (beatPresentString === "1") {
+        $("#playBeatDiv").css({"display": "block"});
+    } else {
+        $("#playBeatDiv").css({"display": "none"});
+    }
     //
     configureMidi();
     //
@@ -66,13 +74,15 @@ function loadMusic() {
     htmlForceButtonsDiv.innerHTML = "";
     htmlMuteButtonsDiv.innerHTML = "";
     //
-    for (i=0; i<channels.length; i++) {
+    for (i = 0; i < channels.length; i++) {
         // Ajout boutton +
         var forceBut = document.createElement("button");
         forceBut.setAttribute("data-channel", i);
         var forceButText = document.createTextNode(channels[i] + "+");
         forceBut.id = "btnForce" + i;
-        forceBut.onclick = function() { forceChannel(this.getAttribute("data-channel")); };
+        forceBut.onclick = function () {
+            forceChannel(this.getAttribute("data-channel"));
+        };
         forceBut.appendChild(forceButText);
         htmlForceButtonsDiv.appendChild(forceBut);
         // Ajout boutton -
@@ -80,10 +90,17 @@ function loadMusic() {
         muteBut.setAttribute("data-channel", i);
         var muteButText = document.createTextNode(channels[i] + "-");
         muteBut.id = "btnMute" + i;
-        muteBut.onclick = function() { muteChannel(this.getAttribute("data-channel")); };
+        muteBut.onclick = function () {
+            muteChannel(this.getAttribute("data-channel"));
+        };
         muteBut.appendChild(muteButText);
         htmlMuteButtonsDiv.appendChild(muteBut);
     }
+
+    // on décoche le play beat
+    playBeat = false;
+    $("#playBeat2").prop("src", "../images/metronome_black_48.png");
+
     // Ajout de l'aide sur les boutons
     $("#btnForce0").attr("data-intro", "Isoler la voix");
     $("#btnForce0").attr("data-position", "left");
@@ -92,8 +109,10 @@ function loadMusic() {
     //
     bookmarkTime = 0;
     setAllVol();
+    setBeatVol();
     $("#bookmark").css({"visibility": "hidden"});
     $("#tempoSlideDiv").css({"visibility": "visible"});
+    $("#playBeatDiv").css({"visibility": "visible"});
     $("#tempoLabel").attr("data-intro", "Ajustement du tempo");
     $("#tempoLabel").attr("data-position", "left");
     MIDI.Player.loadFile("../mid/" + filename, MIDI.Player.start);
@@ -105,9 +124,11 @@ function loadMusic() {
 
 function configureMidi() {
     var instrumentNumber = MIDI.GM.byName[Instrument].number;
-    for (i=0; i<channels.length; i++) {
+    for (i = 0; i < channels.length; i++) {
         MIDI.programChange(i, instrumentNumber);
     }
+    // Pour le channel beat tempo
+    MIDI.programChange(12, MIDI.GM.byName[InstrumentBeat].number);
     //MIDI.noteOn(0,50,1,0);
 }
 ;
@@ -192,16 +213,16 @@ function setAllVol() {
     if (forceSATB.includes(1)) {
         for (i = 0; i < channels.length; i++) {
             if (forceSATB[i] === 1) {
-                MIDI.setVolume(i, 127);
+                MIDI.setVolume(i, 60);
             } else {
-                MIDI.setVolume(i, 20);
+                MIDI.setVolume(i, 10);
             }
         }
     }
     // si pas de bleu : tout au max
     else {
         for (i = 0; i < channels.length; i++) {
-            MIDI.setVolume(i, 127);
+            MIDI.setVolume(i, 60);
         }
     }
     // On coupe les rouges
@@ -210,6 +231,34 @@ function setAllVol() {
             MIDI.setVolume(i, 0);
         }
     }
+}
+;
+
+function setBeatVol() {
+    if (playBeat) {
+        MIDI.setVolume(12, 127);
+        console.log("play beat");
+    } else {
+        MIDI.setVolume(12, 0);
+        console.log("stop beat");
+    }
+}
+;
+
+function changePlayBeat() {
+    if (playBeat) {
+        // il était actif ==> on désactive
+        playBeat = false;
+        $("#playBeat2").prop("src", "../images/metronome_black_48.png");
+    } else {
+        playBeat = true;
+        $("#playBeat2").prop("src", "../images/metronome_green_48.png");
+    }
+    var wasPlaying = MIDI.Player.playing;
+    MIDI.Player.pause();
+    setBeatVol();
+    if (wasPlaying)
+        MIDI.Player.resume();
 }
 ;
 
@@ -261,8 +310,7 @@ function updateTempoLabel(value) {
     var d = document.getElementById("tempoValidate");
     if (value != tempoCorrection) {
         d.src = "../images/ok_darkGreen.png";
-    }
-    else
+    } else
         d.src = "../images/ok.png";
 }
 ;
@@ -272,7 +320,7 @@ function applyTempo() {
     if (tempoCorrection != newTempo) {
         tempoCorrection = newTempo;
         console.log("Apply tempo : " + tempoCorrection + "%");
-        MIDI.Player.timeWarp = 1 - tempoCorrection/100.0;
+        MIDI.Player.timeWarp = 1 - tempoCorrection / 100.0;
         loadMusic();
         updateTempoLabel(tempoCorrection);
     }

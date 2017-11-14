@@ -208,6 +208,10 @@ button:hover {
     visibility: hidden;
 }
 
+#playBeatDiv {
+    visibility: hidden;
+}
+
 .help {
     margin: 0 auto;
     position: absolute;
