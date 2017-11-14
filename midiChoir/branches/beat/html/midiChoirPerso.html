@@ -67,16 +67,16 @@
                 <input type="image" src="../images/undo.png" alt="back" onclick="backToBookmark()" data-intro="Mettre signet / Retour" data-position="right" />
             </div>
         </div>
+        <div id="playBeatDiv" class="center">
+            <span id="playBeatLabel" class="middle">Battre le tempo : </span>
+            <input id="playBeat2" class="middle" type="image" src="../images/metronome_black_48.png" alt="beat" onclick="changePlayBeat()"/>
+        </div>
         <div id="tempoSlideDiv" class="center">
             <span id="tempoLabel" class="middle">Tempo : </span>
             <input id="tempoSlide" class="middle" type="range" min="-50" max="50" step="10" value="0" oninput="updateTempoLabel(this.value)">
             <span id="tempoSpan" class="middle" >+0%</span>
             <input id="tempoValidate" class="middle" type="image" src="../images/ok.png" alt="ok" onclick="applyTempo()"/>
             
-        </div>
-        <div id="playBeatDiv" class="center">
-            <span id="playBeatLabel" class="middle">Battre le tempo : </span>
-            <input id="playBeat2" class="middle" type="image" src="../images/metronome_black_48.png" alt="beat" onclick="changePlayBeat()"/>
         </div>
         <div id="SATBButtonsDiv" class="center loadable">
             <div id="forceButtonsDiv"></div>
