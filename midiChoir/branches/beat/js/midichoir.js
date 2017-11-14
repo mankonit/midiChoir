@@ -1,6 +1,5 @@
 /* global forceSATB, MIDI, muteSATB, eventjs */
 
-var beatPresent = false;
 var playBeat = false;
 var forceSATB = [];
 var muteSATB = [];
@@ -63,14 +62,11 @@ function loadMusic() {
     muteSATB.fill(0);
     var beatPresentString = htmlSelectedOption.getAttribute("data-beat");
     if (beatPresentString === "1") {
-        beatPresent = true;
         $("#playBeatDiv").css({"display": "block"});
     }
     else {
-        beatPresent = false;
         $("#playBeatDiv").css({"display": "none"});
     }
-    console.log(beatPresent);
     //
     configureMidi();
     //
@@ -99,7 +95,8 @@ function loadMusic() {
     }
 
     // on décoche le play beat
-    $("#playBeat").prop("checked", false);
+    playBeat = false;
+    $("#playBeat2").prop("src", "../images/metronome_black_48.png");
     
     // Ajout de l'aide sur les boutons
     $("#btnForce0").attr("data-intro", "Isoler la voix");
@@ -235,8 +232,6 @@ function setAllVol() {
 ;
 
 function setBeatVol() {
-    // play beat
-    playBeat = $("#playBeat").prop("checked");
     if (playBeat) {
        MIDI.setVolume(12, 127); 
        console.log("play beat");
@@ -249,6 +244,19 @@ function setBeatVol() {
 ;
 
 function changePlayBeat() {
+    if (playBeat) {
+        // il était actif ==> on désactive
+        playBeat = false;
+        $("#playBeat2").prop("src", "../images/metronome_black_48.png");
+    }
+        
+    else {
+        
+        playBeat = true;
+        $("#playBeat2").prop("src", "../images/metronome_green_48.png");
+    }
+        
+    
     var wasPlaying = MIDI.Player.playing;
     MIDI.Player.pause();
     setBeatVol();
