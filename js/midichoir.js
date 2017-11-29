@@ -1,19 +1,21 @@
 /* global forceSATB, MIDI, muteSATB, eventjs */
 
 var playBeat = false;
+var playAcc = true;
 var forceSATB = [];
 var muteSATB = [];
 var channels = [];
 var bookmarkTime = 0;
 var Instrument = "acoustic_grand_piano"; //"acoustic_grand_piano" // "accordion"
 var InstrumentBeat = "xylophone";
+var InstrumentAccompaniment = "xylophone";
 var tempoCorrection = 0;
 
 
 window.onload = function () {
     MIDI.loadPlugin({
         soundfontUrl: "./soundfont/",
-        instruments: [Instrument, InstrumentBeat],
+        instruments: [Instrument, InstrumentBeat, InstrumentAccompaniment],
         //targetFormat: 'mp3', // mp3 / ogg
         api: 'webaudio', // audiotag / webmidi / webaudio
         onprogress: function (state, progress) {
@@ -66,6 +68,12 @@ function loadMusic() {
     } else {
         $("#playBeatDiv").css({"display": "none"});
     }
+    var accPresentString = htmlSelectedOption.getAttribute("data-acc");
+    if (accPresentString === "1") {
+        $("#playAccDiv").css({"display": "block"});
+    } else {
+        $("#playAccDiv").css({"display": "none"});
+    }
     //
     configureMidi();
     //
@@ -101,6 +109,10 @@ function loadMusic() {
     playBeat = false;
     $("#playBeat2").prop("src", "../images/metronome_black_48.png");
 
+    // on active le play acc
+    playAcc = true;
+    $("#playAcc").prop("src", "../images/violin_green_64.png");
+
     // Ajout de l'aide sur les boutons
     $("#btnForce0").attr("data-intro", "Isoler la voix");
     $("#btnForce0").attr("data-position", "left");
@@ -110,9 +122,11 @@ function loadMusic() {
     bookmarkTime = 0;
     setAllVol();
     setBeatVol();
+    setAccVol();
     $("#bookmark").css({"visibility": "hidden"});
     $("#tempoSlideDiv").css({"visibility": "visible"});
     $("#playBeatDiv").css({"visibility": "visible"});
+    $("#playAccDiv").css({"visibility": "visible"});
     $("#tempoLabel").attr("data-intro", "Ajustement du tempo");
     $("#tempoLabel").attr("data-position", "left");
     MIDI.Player.loadFile("../mid/" + filename, MIDI.Player.start);
@@ -129,6 +143,8 @@ function configureMidi() {
     }
     // Pour le channel beat tempo
     MIDI.programChange(12, MIDI.GM.byName[InstrumentBeat].number);
+    // Pour l'accompagnement
+    MIDI.programChange(14, MIDI.GM.byName[InstrumentAccompaniment].number);
     //MIDI.noteOn(0,50,1,0);
 }
 ;
@@ -245,6 +261,17 @@ function setBeatVol() {
 }
 ;
 
+function setAccVol() {
+    if (playAcc) {
+        MIDI.setVolume(14, 40);
+        console.log("play acc");
+    } else {
+        MIDI.setVolume(14, 0);
+        console.log("stop acc");
+    }
+}
+;
+
 function changePlayBeat() {
     if (playBeat) {
         // il était actif ==> on désactive
@@ -257,6 +284,23 @@ function changePlayBeat() {
     var wasPlaying = MIDI.Player.playing;
     MIDI.Player.pause();
     setBeatVol();
+    if (wasPlaying)
+        MIDI.Player.resume();
+}
+;
+
+function changePlayAcc() {
+    if (playAcc) {
+        // il était actif ==> on désactive
+        playAcc = false;
+        $("#playAcc").prop("src", "../images/violin_black_64.png");
+    } else {
+        playAcc = true;
+        $("#playAcc").prop("src", "../images/violin_green_64.png");
+    }
+    var wasPlaying = MIDI.Player.playing;
+    MIDI.Player.pause();
+    setAccVol();
     if (wasPlaying)
         MIDI.Player.resume();
 }
