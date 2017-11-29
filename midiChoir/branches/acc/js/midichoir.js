@@ -111,7 +111,7 @@ function loadMusic() {
 
     // on active le play acc
     playAcc = true;
-    $("#playAcc").prop("src", "../images/violin_green_48.png");
+    $("#playAcc").prop("src", "../images/violin_green_64.png");
 
     // Ajout de l'aide sur les boutons
     $("#btnForce0").attr("data-intro", "Isoler la voix");
@@ -293,10 +293,10 @@ function changePlayAcc() {
     if (playAcc) {
         // il était actif ==> on désactive
         playAcc = false;
-        $("#playAcc").prop("src", "../images/violin_black_48.png");
+        $("#playAcc").prop("src", "../images/violin_black_64.png");
     } else {
         playAcc = true;
-        $("#playAcc").prop("src", "../images/violin_green_48.png");
+        $("#playAcc").prop("src", "../images/violin_green_64.png");
     }
     var wasPlaying = MIDI.Player.playing;
     MIDI.Player.pause();
