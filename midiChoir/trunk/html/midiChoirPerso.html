@@ -54,6 +54,7 @@
                 <option value="Cima_O_Domine.mid" data-channels="A.B">Cima - O Domine</option>
                 <option value="Dowland_Lady_if_you_so_spite_me.mid" data-channels="A.B">Dowland - Lady if you so spite me</option>
                 <option value="Garau_Adoro_Te_devote.mid" data-channels="A.T.B">Garau - Adoro Te Devote</option>
+                <option value="les_djinns_piano.mid" data-channels="S.A.T.B" data-acc="1">Faure - Les Djinns</option>
             </select> 
         </div>
         <div class="player loadable">
@@ -81,11 +82,14 @@
             <input id="tempoSlide" class="middle" type="range" min="-50" max="50" step="10" value="0" oninput="updateTempoLabel(this.value)">
             <span id="tempoSpan" class="middle" >+0%</span>
             <input id="tempoValidate" class="middle" type="image" src="../images/ok.png" alt="ok" onclick="applyTempo()"/>
-            
         </div>
         <div id="SATBButtonsDiv" class="center loadable">
             <div id="forceButtonsDiv"></div>
             <div id="muteButtonsDiv"></div>
+        </div>
+        <div id="playAccDiv" class="center">
+            <span id="playAccLabel" class="middle">Jouer l'accompagnement : </span>
+            <input id="playAcc" class="middle" type="image" src="../images/violin_black_64.png" alt="acc" onclick="changePlayAcc()"/>
         </div>
         <div class="infos">
             <p id="message"></p>

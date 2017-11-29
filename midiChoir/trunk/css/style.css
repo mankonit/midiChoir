@@ -212,6 +212,10 @@ button:hover {
     visibility: hidden;
 }
 
+#playAccDiv {
+    visibility: hidden;
+}
+
 .help {
     margin: 0 auto;
     position: absolute;
