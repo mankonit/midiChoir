@@ -6,9 +6,9 @@ var forceSATB = [];
 var muteSATB = [];
 var channels = [];
 var bookmarkTime = 0;
-var Instrument = "clarinet"; //"acoustic_grand_piano" // "accordion"
+var Instrument = "acoustic_grand_piano"; //"acoustic_grand_piano" // "accordion" // "electric_piano_1"
 var InstrumentBeat = "xylophone";
-var InstrumentAccompaniment = "acoustic_grand_piano";
+var InstrumentAccompaniment = "xylophone";
 var tempoCorrection = 0;
 
 
