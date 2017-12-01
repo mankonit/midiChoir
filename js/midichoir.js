@@ -6,9 +6,9 @@ var forceSATB = [];
 var muteSATB = [];
 var channels = [];
 var bookmarkTime = 0;
-var Instrument = "acoustic_grand_piano"; //"acoustic_grand_piano" // "accordion" // "electric_piano_1"
+var Instrument = "electric_piano_1"; //"acoustic_grand_piano" // "accordion" // "electric_piano_1"
 var InstrumentBeat = "xylophone";
-var InstrumentAccompaniment = "xylophone";
+var InstrumentAccompaniment = "acoustic_grand_piano";
 var tempoCorrection = 0;
 
 
@@ -263,7 +263,7 @@ function setBeatVol() {
 
 function setAccVol() {
     if (playAcc) {
-        MIDI.setVolume(14, 40);
+        MIDI.setVolume(14, 10);
         console.log("play acc");
     } else {
         MIDI.setVolume(14, 0);
