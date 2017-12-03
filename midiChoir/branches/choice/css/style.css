@@ -237,3 +237,10 @@ button:hover {
     height: 40px;
     margin: 5px;
 }
+
+.params {
+    margin: 0 auto;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+}

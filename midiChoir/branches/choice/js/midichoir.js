@@ -6,22 +6,21 @@ var forceSATB = [];
 var muteSATB = [];
 var channels = [];
 var bookmarkTime = 0;
-var Instrument = "electric_piano_1"; //"acoustic_grand_piano" // "accordion" // "electric_piano_1"
+var Instrument;
 var InstrumentBeat = "xylophone";
-var InstrumentAccompaniment = "acoustic_grand_piano";
+var InstrumentAccompaniment;;
 var tempoCorrection = 0;
 
 
 window.onload = function () {
     MIDI.loadPlugin({
         soundfontUrl: "./soundfont/",
-        instruments: [Instrument, InstrumentBeat, InstrumentAccompaniment],
+        instruments: ["electric_piano_1", "acoustic_grand_piano", "xylophone"],
         //targetFormat: 'mp3', // mp3 / ogg
         api: 'webaudio', // audiotag / webmidi / webaudio
         onprogress: function (state, progress) {
             console.log(state, progress);
-            var x = document.getElementById("message");
-            x.innerHTML = "Status : " + state + " " + Math.floor(progress * 100) + "%";
+            document.getElementById("message").innerHTML = "Status : " + state + " " + Math.floor(progress * 100) + "%";
         },
         onsuccess: function () {
             loaded();
@@ -33,12 +32,10 @@ function loaded() {
     console.log("loaded");
     $(".loader").css({"display": "none"});
     $(".loadable").css({"visibility": "visible"});
-    var x = document.getElementById("plugin");
-    x.innerHTML = "Plugin : " + MIDI.api;
-    var x = document.getElementById("format");
-    x.innerHTML = "Format : " + MIDI.__audioFormat;
-    var x = document.getElementById("musicSelect");
-    x.selectedIndex = 0;
+    document.getElementById("plugin").innerHTML = "Plugin : " + MIDI.api;
+    document.getElementById("format").innerHTML = "Format : " + MIDI.__audioFormat;
+    document.getElementById("musicSelect").selectedIndex = 0;
+    checkCookieInstrumentSet();
 }
 ;
 
@@ -49,6 +46,33 @@ function changeTrack() {
     loadMusic();
 }
 ;
+
+function changeInstrumentSet() {
+    var setId = parseInt(document.getElementById("instrumentSelect").value);
+    setCookie("setId", setId, 3650);
+    loadMusic();
+}
+;
+
+function applyInstrumentSet() {
+    var setId = parseInt(getCookie("setId"));
+    switch (setId) {
+        case 0:
+            Instrument = "electric_piano_1";
+            InstrumentAccompaniment = "acoustic_grand_piano";
+            break;
+        case 1:
+            Instrument = "acoustic_grand_piano";
+            InstrumentAccompaniment = "xylophone";
+            break;
+        default:
+            Instrument = "electric_piano_1";
+            InstrumentAccompaniment = "acoustic_grand_piano";
+            break;
+    }
+}
+;
+
 function loadMusic() {
     var htmlSelect = document.getElementById("musicSelect");
     var filename = htmlSelect.value;
@@ -75,6 +99,7 @@ function loadMusic() {
         $("#playAccDiv").css({"display": "none"});
     }
     //
+    applyInstrumentSet();
     configureMidi();
     //
     var htmlForceButtonsDiv = document.getElementById("forceButtonsDiv");
@@ -131,8 +156,7 @@ function loadMusic() {
     $("#tempoLabel").attr("data-position", "left");
     MIDI.Player.loadFile("../mid/" + filename, MIDI.Player.start);
     MIDIPlayerPercentage(MIDI.Player);
-    var d = document.getElementById("pausePlayStop");
-    d.src = "../images/media_pause.png";
+    document.getElementById("pausePlayStop").src = "../images/media_pause.png";
 }
 ;
 
@@ -368,7 +392,44 @@ function applyTempo() {
         loadMusic();
         updateTempoLabel(tempoCorrection);
     }
-    var d = document.getElementById("tempoValidate");
-    d.src = "../images/ok.png";
+    document.getElementById("tempoValidate").src = "../images/ok.png";
+}
+;
+
+function setCookie(cname, cvalue, exdays) {
+    var d = new Date();
+    d.setTime(d.getTime() + (exdays*24*60*60*1000));
+    var expires = "expires="+ d.toUTCString();
+    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}
+;
+
+function getCookie(cname) {
+    var name = cname + "=";
+    var decodedCookie = decodeURIComponent(document.cookie);
+    var ca = decodedCookie.split(';');
+    for(var i = 0; i <ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+        }
+    }
+    return "";
+}
+;
+
+function checkCookieInstrumentSet() {
+    var setId = getCookie("setId");
+    console.log("checkCookieInstrumentSet");
+    if (setId == "") {
+        console.log("pas de cookie");
+        setCookie("setId", 0, 3650);
+    }
+    else {
+        document.getElementById("instrumentSelect").selectedIndex = parseInt(setId);
+    }
 }
 ;
