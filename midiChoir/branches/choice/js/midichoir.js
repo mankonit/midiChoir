@@ -8,7 +8,8 @@ var channels = [];
 var bookmarkTime = 0;
 var Instrument;
 var InstrumentBeat = "xylophone";
-var InstrumentAccompaniment;;
+var InstrumentAccompaniment;
+var setId;
 var tempoCorrection = 0;
 
 
@@ -48,14 +49,14 @@ function changeTrack() {
 ;
 
 function changeInstrumentSet() {
-    var setId = parseInt(document.getElementById("instrumentSelect").value);
+    setId = parseInt(document.getElementById("instrumentSelect").value);
     setCookie("setId", setId, 3650);
     loadMusic();
 }
 ;
 
 function applyInstrumentSet() {
-    var setId = parseInt(getCookie("setId"));
+    console.log("applyInstrumentSet : " + setId);
     switch (setId) {
         case 0:
             Instrument = "electric_piano_1";
@@ -422,10 +423,10 @@ function getCookie(cname) {
 ;
 
 function checkCookieInstrumentSet() {
-    var setId = getCookie("setId");
-    console.log("checkCookieInstrumentSet");
-    if (setId == "") {
-        console.log("pas de cookie");
+    setId = parseInt(getCookie("setId"));
+    console.log("checkCookieInstrumentSet : " + setId);
+    if (!setId && setId !== 0) {
+        console.log("Pas de cookie");
         setCookie("setId", 0, 3650);
     }
     else {
