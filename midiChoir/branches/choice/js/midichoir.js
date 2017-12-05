@@ -9,9 +9,9 @@ var bookmarkTime = 0;
 var Instrument;
 var InstrumentBeat = "xylophone";
 var InstrumentAccompaniment;
+var accVolume;
 var setId;
 var tempoCorrection = 0;
-
 
 window.onload = function () {
     MIDI.loadPlugin({
@@ -61,14 +61,17 @@ function applyInstrumentSet() {
         case 0:
             Instrument = "electric_piano_1";
             InstrumentAccompaniment = "acoustic_grand_piano";
+            accVolume = 10;
             break;
         case 1:
             Instrument = "acoustic_grand_piano";
             InstrumentAccompaniment = "xylophone";
+            accVolume = 30;
             break;
         default:
             Instrument = "electric_piano_1";
             InstrumentAccompaniment = "acoustic_grand_piano";
+            accVolume = 10;
             break;
     }
 }
@@ -228,7 +231,8 @@ var MIDIPlayerPercentage = function (player) {
             pausePlayStop();
         }
     });
-    //
+
+
     function timeFormatting(n) {
         var minutes = n / 60 >> 0;
         var seconds = String(n - (minutes * 60) >> 0);
@@ -254,16 +258,16 @@ function setAllVol() {
     if (forceSATB.includes(1)) {
         for (i = 0; i < channels.length; i++) {
             if (forceSATB[i] === 1) {
-                MIDI.setVolume(i, 60);
+                MIDI.setVolume(i, 80);
             } else {
-                MIDI.setVolume(i, 10);
+                MIDI.setVolume(i, 15);
             }
         }
     }
     // si pas de bleu : tout au max
     else {
         for (i = 0; i < channels.length; i++) {
-            MIDI.setVolume(i, 60);
+            MIDI.setVolume(i, 80);
         }
     }
     // On coupe les rouges
@@ -276,23 +280,21 @@ function setAllVol() {
 ;
 
 function setBeatVol() {
+    console.log("setBeatVol : " + playBeat);
     if (playBeat) {
         MIDI.setVolume(12, 127);
-        console.log("play beat");
     } else {
         MIDI.setVolume(12, 0);
-        console.log("stop beat");
     }
 }
 ;
 
 function setAccVol() {
+    console.log("setAccVol : " + playAcc + " - Volume : " + accVolume);
     if (playAcc) {
-        MIDI.setVolume(14, 10);
-        console.log("play acc");
+        MIDI.setVolume(14, accVolume);
     } else {
         MIDI.setVolume(14, 0);
-        console.log("stop acc");
     }
 }
 ;
@@ -399,8 +401,8 @@ function applyTempo() {
 
 function setCookie(cname, cvalue, exdays) {
     var d = new Date();
-    d.setTime(d.getTime() + (exdays*24*60*60*1000));
-    var expires = "expires="+ d.toUTCString();
+    d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+    var expires = "expires=" + d.toUTCString();
     document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
 }
 ;
@@ -409,7 +411,7 @@ function getCookie(cname) {
     var name = cname + "=";
     var decodedCookie = decodeURIComponent(document.cookie);
     var ca = decodedCookie.split(';');
-    for(var i = 0; i <ca.length; i++) {
+    for (var i = 0; i < ca.length; i++) {
         var c = ca[i];
         while (c.charAt(0) == ' ') {
             c = c.substring(1);
@@ -428,8 +430,7 @@ function checkCookieInstrumentSet() {
     if (!setId && setId !== 0) {
         console.log("Pas de cookie");
         setCookie("setId", 0, 3650);
-    }
-    else {
+    } else {
         document.getElementById("instrumentSelect").selectedIndex = parseInt(setId);
     }
 }
