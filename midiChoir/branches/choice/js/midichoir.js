@@ -65,8 +65,8 @@ function applyInstrumentSet() {
             break;
         case 1:
             Instrument = "acoustic_grand_piano";
-            InstrumentAccompaniment = "xylophone";
-            accVolume = 30;
+            InstrumentAccompaniment = "electric_piano_1";
+            accVolume = 15;
             break;
         default:
             Instrument = "electric_piano_1";
