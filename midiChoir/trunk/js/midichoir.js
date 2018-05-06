@@ -13,7 +13,10 @@ var accVolume;
 var setId;
 var tempoCorrection = 0;
 
-window.onload = function () {
+function startAudio() {
+    console.log("start");
+    $(".starter").css({"display": "none"});
+    $(".loader").css({"visibility": "visible"});
     MIDI.loadPlugin({
         soundfontUrl: "./soundfont/",
         instruments: ["electric_piano_1", "acoustic_grand_piano", "xylophone"],
@@ -27,10 +30,12 @@ window.onload = function () {
             loaded();
         }
     });
-};
+}
+;
 
 function loaded() {
     console.log("loaded");
+    
     $(".loader").css({"display": "none"});
     $(".loadable").css({"visibility": "visible"});
     document.getElementById("plugin").innerHTML = "Plugin : " + MIDI.api;
