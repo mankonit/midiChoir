@@ -128,6 +128,12 @@ select {
     margin: 20px;
 }
 
+.top {
+    text-align: center;
+    width: auto;
+    height: 30px;
+}
+
 .center button {
     background-color: #555;  
     border: 10px;
@@ -148,9 +154,9 @@ button:hover {
 }
 
 .infos {
-    width: 600px;
+    width: 150px;
     margin: 0 auto;
-    position: absolute;
+    position: fixed;
     bottom: 0;
 }
 
@@ -218,18 +224,22 @@ button:hover {
 
 #SATBButtonsDiv div {
     margin: 10px;
+    min-width: 400px;
 }
 
 #tempoSlideDiv {
     visibility: hidden;
+    min-width: 400px;
 }
 
 #playBeatDiv {
     visibility: hidden;
+    min-width: 400px;
 }
 
 #playAccDiv {
     visibility: hidden;
+    min-width: 400px;
 }
 
 .help {

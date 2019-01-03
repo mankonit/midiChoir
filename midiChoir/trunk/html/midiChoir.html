@@ -4,7 +4,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Choir Helper - Eolides</title>
-        <link href="../css/style.css?v=1.1" rel="stylesheet" type="text/css" />
+        <link href="../css/style.css?v=1.2" rel="stylesheet" type="text/css" />
         <link href="../css/chardinjs.css" rel="stylesheet" type="text/css"/>
         <!-- polyfill -->
         <!-- shim -->
@@ -40,6 +40,14 @@
     <body class="body">
         <button class="starter" type="button" onclick="startAudio()">Start</button> 
         <div class="loader"></div>
+        <div class="top loadable">
+            <div class="help" >
+                <button onclick="$('body').chardinJs('start')">?</button>
+            </div>
+            <div class="params" >
+                <input id="paramsMenuButton" type="image" src="../images/gearwheel_48.png" alt="acc" onclick="openNav()"/>
+            </div>
+        </div>
         <div class="center loadable">
             <select id="musicSelect" onchange="changeTrack()" data-intro="Choix morceau" data-position="left">
                 <option value="">-</option>
@@ -89,13 +97,6 @@
             <p id="format"></p>
             <p>mathiaskahn@2017</p>
         </div>
-        <div class="help loadable" >
-            <button onclick="$('body').chardinJs('start')">?</button>
-        </div>
-        <div class="params loadable" >
-            <input id="paramsMenuButton" type="image" src="../images/gearwheel_48.png" alt="acc" onclick="openNav()"/>
-        </div>
-        
         <div id="mySidenav" class="sidenav">
             <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
             <span>Instrument:</span>
