@@ -1,4 +1,6 @@
 /* global forceSATB, MIDI, muteSATB, eventjs */
+// beat channel 12
+// accompagnement channel 14
 
 var playBeat = false;
 var playAcc = true;
