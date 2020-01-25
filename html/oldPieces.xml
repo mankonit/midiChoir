@@ -91,3 +91,10 @@
 <option value="jean_racine_tutti.mid" data-channels="S.A.T.B" data-acc="1">Fauré - Cantique de Jean Racine</option>
 <option value="Berlioz_Tristia_MortOphelie.mid" data-channels="S.A" data-acc="1">Berlioz - Tristia - Mort d'Ophélie</option>
 <option value="the_real_group-words.mid" data-channels="S.A.T.Br.B">Anders Edenroth - Words</option>
+
+<!-- Enfance du Christ -->
+<option value="BerliozEnfanceChrist/07-done.mid" data-channels="T1.T2.B1.B2" data-acc="1">EDC - 5.Choeur des devins</option>
+<option value="BerliozEnfanceChrist/11-leave.mid" data-channels="S.A.T.B" data-acc="1">EDC - 9.Adieu des bergers</option>
+<option value="BerliozEnfanceChrist/15-BeWel.mid" data-channels="S.A.T.B" data-acc="0">EDC - 13.La Vierge Marie, ...</option>
+<option value="BerliozEnfanceChrist/17-rest.mid" data-channels="S.A.T1.T2.B1.B2" data-acc="0">EDC - 15.La Vierge Marie, ...</option>
+<option value="BerliozEnfanceChrist/18-Epil.mid" data-channels="S.A.T.B" data-acc="0">EDC - 16.Epilogue</option>
