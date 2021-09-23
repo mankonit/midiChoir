@@ -43,10 +43,8 @@
 <option value="delivrance/Messe_delivrance_1.8.mid" data-channels="S.A.T.B.solT.solB" data-acc="1">Dubois - Délivrance - 8</option>
 <option value="Alan-Nihil-Angelisme48.mid" data-channels="S.A.T.B" data-acc="0">DAL - Angélisme 48</option>
 <option value="Brahms-Zwei_Motetten-op29-1.mid" data-channels="S.A.T.B1.B2" data-acc="0">Brahms - Op29 - 1</option>
-<option value="NorthLightsB_rev.mid" data-channels="S.A.T.B">Gjeilo - Northern Lights</option>
 
 <!-- Romantique 2019 -->
-
 <option value="Brahms-Drei_Gesaenge-op42-1.mid" data-channels="S.A1.A2.T.B1.B2" data-acc="0">Brahms - Op42 - 1</option>
 <option value="Brahms-Drei_Gesaenge-op42-2.mid" data-channels="S.A1.A2.T.B1.B2" data-acc="0">Brahms - Op42 - 2</option>
 <option value="Brahms-Drei_Gesaenge-op42-3.mid" data-channels="S.A1.A2.T.B1.B2" data-acc="0">Brahms - Op42 - 3</option>
@@ -63,7 +61,6 @@
 <option value="Don_t_Stop_Me_Now.mid" data-channels="S.A.T.B" data-acc="0">Queen - Don't stop me now</option>
 
 <!-- Pologne 2019 -->
-
 <option value="Corsi_Adoramus_te.midi" data-channels="S.A.T.B" data-acc="0">Corsi - Adoramus te</option>
 <option value="Ingegneri-O_Bone_Iesu.midi" data-channels="S.A.T.B" data-acc="0">Ingegneri - O Bone Iesu</option>
 <option value="Brahms-Zwei_Motetten-op29-1.mid" data-channels="S.A.T.B1.B2" data-acc="0">Brahms - Es ist das Heil</option>
@@ -78,7 +75,6 @@
 <option value="Rheinberger_Zwei_Antiphone_2.mid" data-channels="S.A.T.B">Rheinberger - Zwei Antiphone - 2</option>
 
 <!-- Perso -->
-
 <option value="come_again.mid" data-channels="S.A.T.B">Come Again</option>
 <option value="Robledo_hoc_corpus.mid" data-channels="S.A.T.B">Hoc Corpus</option>
 <option value="come_heavy_sleep.mid" data-channels="S.A.T.B" data-beat="1">Come Heavy Sleep</option>
@@ -94,6 +90,14 @@
 <option value="jean_racine_tutti.mid" data-channels="S.A.T.B" data-acc="1">Fauré - Cantique de Jean Racine</option>
 <option value="Berlioz_Tristia_MortOphelie.mid" data-channels="S.A" data-acc="1">Berlioz - Tristia - Mort d'Ophélie</option>
 <option value="the_real_group-words.mid" data-channels="S.A.T.Br.B">Anders Edenroth - Words</option>
+<option value="Happy_Birthday_SATB.mid" data-channels="S.A.T.B">Happy Birthday</option>
+<option value="HappyBirthday.mid" data-channels="S.A.B" data-beat="1">Joyeux Anniversaire</option>
+<option value="Wise_old_Chiron.mid" data-channels="S.B">Wise - Old Chiron</option>
+<option value="Lamour_de_moy.mid" data-channels="S.A.T.B">L'amour de moy</option>
+<option value="janequin_toutes_les_nuits.mid" data-channels="S.A.T.B">Janequin - Toutes Les Nuits</option>
+<option value="Sicut_cervus_Palestrina_JG.mid" data-channels="S.A.T.B">Palestrina - Sicut Cervus - 1</option>
+<option value="Sicut_cervus_Palestrina_2.mid" data-channels="S.A.T.B">Palestrina - Sicut Cervus - 2</option>
+<option value="allo_maman_bobo.mid" data-channels="S.A.B">Allo maman bobo</option>
 
 <!-- Enfance du Christ -->
 <option value="BerliozEnfanceChrist/07-done.mid" data-channels="T1.T2.B1.B2" data-acc="1">EDC - 5.Choeur des devins</option>
@@ -101,3 +105,28 @@
 <option value="BerliozEnfanceChrist/15-BeWel.mid" data-channels="S.A.T.B" data-acc="0">EDC - 13.La Vierge Marie, ...</option>
 <option value="BerliozEnfanceChrist/17-rest.mid" data-channels="S.A.T1.T2.B1.B2" data-acc="0">EDC - 15.La Vierge Marie, ...</option>
 <option value="BerliozEnfanceChrist/18-Epil.mid" data-channels="S.A.T.B" data-acc="0">EDC - 16.Epilogue</option>
+
+<!-- A capella 2020-2021 -->
+<option value="randall_thompson_alleluia.mid" data-channels="S.A.T.B" data-acc="0">Randall Thompson - Alleluia</option>
+<option value="O_magnum_mysterium_Victoria.mid" data-channels="S.A.T.B" data-acc="0">Victoria - O Magnum Mysterium</option>
+<option value="o_magnum_mysterium_lauridsen.mid" data-channels="S1.S2.A1.A2.T1.T2.B1.B2" data-acc="0">Lauridsen - O Magnum Mysterium</option>
+<option value="Kaczorowski_Laudate_Dominum.mid" data-channels="S.A.T.B">Kaczorowski - Laudate Dominum</option>
+<option value="Angelus_ad_pastores_ait_Gabrieli_rev.mid" data-channels="S.A.T.B" data-beat="1">Gabrieli - Angelus Ad Pastores Ait</option>
+<option value="Salve_Regina.mid" data-channels="S.A.T.B">Poulenc - Salve Regina</option>
+<option value="Ingegneri-O_Bone_Iesu.midi" data-channels="S.A.T.B" data-acc="0">Ingegneri - O Bone Iesu</option>
+<option value="Corsi_Adoramus_te.midi" data-channels="S.A.T.B" data-acc="0">Corsi - Adoramus te</option>
+<option value="Lotti_Crucifixus_a_8.mid" data-channels="S1.S2.A1.A2.T1.T2.B1.B2" data-acc="0">Lotti - Crucifixus a 8</option>
+<option value="Vasks_Pater_noster.mid" data-channels="S.A.T.B" data-acc="0">Vasks - Pater noster</option>
+<option value="Palestrina_Pater_noster_8.mid" data-channels="S1.A1.T1.B1.S2.A2.T2.B2" data-acc="0">Palestrina - Pater Noster a 8</option>
+<option value="Bardos-Eli_Eli.mid" data-channels="S.A.T.B">Bardos - Eli, Eli</option>
+
+<!-- Divers 2020 - 2021 -->
+
+<option value="Janequin_a_ce_joli_moi.mid" data-channels="S.A.T.B">Janequin - Joli mois de mai</option>
+<option value="El_noi_de_la_mare.mid" data-channels="S.A1.A2.T.B1.B2">El noi de la mare</option>
+<option value="petit_garcon.mid" data-channels="S.A.T.B">Petit garcon</option>
+<option value="Gevaert_LeMessageDesAnges.mid" data-channels="S.A.T.B">Gevaert - Le Message Des Anges</option>
+
+<!-- Madrigaux Eolides -->
+<option value="Gabrieli_a-caso-un-giorno-mi-guido-la-sorte.mid" data-channels="C1.C2.B">Gabrieli_a-caso-un-giorno-mi-guido-la-sorte</option>
+<option value="marenzio-madonna-sua-merce.mid" data-channels="S.A.T.B">Marenzio - Madonna sua Merce</option>
