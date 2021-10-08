@@ -98,6 +98,7 @@
 <option value="Sicut_cervus_Palestrina_JG.mid" data-channels="S.A.T.B">Palestrina - Sicut Cervus - 1</option>
 <option value="Sicut_cervus_Palestrina_2.mid" data-channels="S.A.T.B">Palestrina - Sicut Cervus - 2</option>
 <option value="allo_maman_bobo.mid" data-channels="S.A.B">Allo maman bobo</option>
+<option value="Mille_regrets_Des_Prez.mid" data-channels="S.A.T.B" data-acc="0">Josquin des Prez - Mille Regretz</option>
 
 <!-- Enfance du Christ -->
 <option value="BerliozEnfanceChrist/07-done.mid" data-channels="T1.T2.B1.B2" data-acc="1">EDC - 5.Choeur des devins</option>
