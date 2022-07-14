@@ -66,18 +66,18 @@ function applyInstrumentSet() {
     console.log("applyInstrumentSet : " + setId);
     switch (setId) {
         case 0:
-            Instrument = "electric_piano_1";
-            InstrumentAccompaniment = "acoustic_grand_piano";
+            Instrument = "acoustic_grand_piano";
+            InstrumentAccompaniment = "electric_piano_1";
             accVolume = 10;
             break;
         case 1:
-            Instrument = "acoustic_grand_piano";
-            InstrumentAccompaniment = "electric_piano_1";
+            Instrument = "electric_piano_1";
+            InstrumentAccompaniment = "acoustic_grand_piano";
             accVolume = 15;
             break;
         default:
-            Instrument = "electric_piano_1";
-            InstrumentAccompaniment = "acoustic_grand_piano";
+            Instrument = "acoustic_grand_piano";
+            InstrumentAccompaniment = "electric_piano_1";
             accVolume = 10;
             break;
     }
