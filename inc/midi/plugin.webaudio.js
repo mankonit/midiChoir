@@ -16,6 +16,7 @@
 		var sources = {};
 		var effects = {};
 		var audioBuffers = {};
+		var pitch = 0;
 		///
 		midi.audioBuffers = audioBuffers;
 		midi.send = function(data, delay) { };
@@ -59,6 +60,10 @@
 // 			}
 		};
 
+		midi.addPitch = function(i_pitch) {
+			pitch = i_pitch;
+		}
+
 		midi.noteOn = function(channelId, noteId, velocity, delay) {
 			delay = delay || 0;
 
@@ -98,7 +103,7 @@
 			var channel = root.channels[channelId];
 			var gain = ((velocity / 127) * (channel.volume / 127) * 2) - 1;
 			source.connect(ctx.destination);
-			source.playbackRate.value = 1; // pitch shift 
+			source.playbackRate.value = 1+pitch; // pitch shift 
 			source.gainNode = ctx.createGain(); // gain
 			source.gainNode.connect(ctx.destination);
 			source.gainNode.gain.value = Math.min(1.0, Math.max(-1.0, gain));

@@ -56,7 +56,6 @@
                 <option value="Dos_cuerpos.mid" data-channels="S.A.T.B" data-beat="0">Dos cuerpos</option>
                 <option value="Ave_verum_corpus_Saint-Saens.mid" data-channels="S.A.T.B" data-beat="0">Ave Verum Saint Saens</option>
                 <option value="Ecce_vidimus_eum.mid" data-channels="S.A.T.B" data-beat="0">Ecce Vidimus Eum</option>
-                <option value="Ecce_vidimus_eum+1dt.mid" data-channels="S.A.T.B" data-beat="0">Ecce Vidimus Eum +1/2</option>
                 <option value="Ave_verum_corpus_Saint-Saens.mid" data-channels="S.A.T.B" data-beat="0">Ave Verum Saint Saens</option>
             </select> 
         </div>
@@ -85,6 +84,12 @@
             <input id="tempoSlide" class="middle" type="range" min="-50" max="50" step="10" value="0" oninput="updateTempoLabel(this.value)">
             <span id="tempoSpan" class="middle" >+0%</span>
             <input id="tempoValidate" class="middle" type="image" src="../images/ok.png" alt="ok" onclick="applyTempo()"/>
+        </div>
+        <div id="pitchSlideDiv" class="center">
+            <span id="pitchLabel" class="middle">Pitch : </span>
+            <input id="pitchSlide" class="middle" type="range" min="-10" max="10" step="1" value="0" oninput="updatePitchLabel(this.value)">
+            <span id="pitchSpan" class="middle" >+0%</span>
+            <input id="pitchValidate" class="middle" type="image" src="../images/ok.png" alt="ok" onclick="applyPitch()"/>
         </div>
         <div id="SATBButtonsDiv" class="center loadable">
             <div id="forceButtonsDiv"></div>

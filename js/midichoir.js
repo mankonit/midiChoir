@@ -14,6 +14,7 @@ var InstrumentAccompaniment;
 var accVolume;
 var setId;
 var tempoCorrection = 0;
+var pitchCorrection = 0;
 
 function startAudio() {
     console.log("start");
@@ -49,8 +50,11 @@ function loaded() {
 
 function changeTrack() {
     document.getElementById("tempoSlide").value = 0;
+    document.getElementById("pitchSlide").value = 0;
     applyTempo();
+    applyPitch();
     updateTempoLabel(0);
+    updatePitchLabel(0);
     loadMusic();
 }
 ;
@@ -161,6 +165,7 @@ function loadMusic() {
     setAccVol();
     $("#bookmark").css({"visibility": "hidden"});
     $("#tempoSlideDiv").css({"visibility": "visible"});
+    $("#pitchSlideDiv").css({"visibility": "visible"});
     $("#playBeatDiv").css({"visibility": "visible"});
     $("#playAccDiv").css({"visibility": "visible"});
     $("#tempoLabel").attr("data-intro", "Ajustement du tempo");
@@ -403,6 +408,32 @@ function applyTempo() {
         updateTempoLabel(tempoCorrection);
     }
     document.getElementById("tempoValidate").src = "../images/ok.png";
+}
+;
+
+function updatePitchLabel(value) {
+    var d = document.getElementById("pitchSpan");
+    d.innerHTML = value + "%";
+    if (value >= 0)
+        d.innerHTML = "+" + d.innerHTML;
+    var d = document.getElementById("pitchValidate");
+    if (value != pitchCorrection) {
+        d.src = "../images/ok_darkGreen.png";
+    } else
+        d.src = "../images/ok.png";
+}
+;
+
+function applyPitch() {
+    var newPitch = document.getElementById("pitchSlide").value;
+    if (pitchCorrection != newPitch) {
+        pitchCorrection = newPitch;
+        console.log("Apply pitch : " + pitchCorrection + "%");
+        MIDI.addPitch(pitchCorrection/100);
+        loadMusic();
+        updatePitchLabel(pitchCorrection);
+    }
+    document.getElementById("pitchValidate").src = "../images/ok.png";
 }
 ;
 
