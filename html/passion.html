@@ -113,6 +113,12 @@
             <span id="tempoSpan" class="middle" >+0%</span>
             <input id="tempoValidate" class="middle" type="image" src="../images/ok.png" alt="ok" onclick="applyTempo()"/>
         </div>
+        <div id="pitchSlideDiv" class="center">
+            <span id="pitchLabel" class="middle">Pitch : </span>
+            <input id="pitchSlide" class="middle" type="range" min="-10" max="10" step="1" value="0" oninput="updatePitchLabel(this.value)">
+            <span id="pitchSpan" class="middle" >+0%</span>
+            <input id="pitchValidate" class="middle" type="image" src="../images/ok.png" alt="ok" onclick="applyPitch()"/>
+        </div>
         <div id="SATBButtonsDiv" class="center loadable">
             <div id="forceButtonsDiv"></div>
             <div id="muteButtonsDiv"></div>

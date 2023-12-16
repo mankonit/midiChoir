@@ -81,6 +81,12 @@
             <span id="tempoSpan" class="middle" >+0%</span>
             <input id="tempoValidate" class="middle" type="image" src="../images/ok.png" alt="ok" onclick="applyTempo()"/>
         </div>
+        <div id="pitchSlideDiv" class="center">
+            <span id="pitchLabel" class="middle">Pitch : </span>
+            <input id="pitchSlide" class="middle" type="range" min="-10" max="10" step="1" value="0" oninput="updatePitchLabel(this.value)">
+            <span id="pitchSpan" class="middle" >+0%</span>
+            <input id="pitchValidate" class="middle" type="image" src="../images/ok.png" alt="ok" onclick="applyPitch()"/>
+        </div>
         <div id="SATBButtonsDiv" class="center loadable">
             <div id="forceButtonsDiv"></div>
             <div id="muteButtonsDiv"></div>
@@ -99,8 +105,8 @@
             <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
             <span>Instrument:</span>
             <select id="instrumentSelect" onchange="changeInstrumentSet()">
-                <option value="0">Piano électrique</option>
-                <option value="1">Piano</option>
+                <option value="0">Piano</option>
+                <option value="1">Piano électrique</option>
             </select>
         </div>
         
