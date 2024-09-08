@@ -131,3 +131,11 @@
 <!-- Madrigaux Eolides -->
 <option value="Gabrieli_a-caso-un-giorno-mi-guido-la-sorte.mid" data-channels="C1.C2.B">Gabrieli_a-caso-un-giorno-mi-guido-la-sorte</option>
 <option value="marenzio-madonna-sua-merce.mid" data-channels="S.A.T.B">Marenzio - Madonna sua Merce</option>
+
+<!-- Nouveau monde (amérique du sud) -->
+<option value="se_equivoco_la_paloma.mid" data-channels="S.A.T.B" data-beat="0">Se equivoco la paloma</option>
+<option value="Dos_cuerpos.mid" data-channels="S.A.T.B" data-beat="0">Dos cuerpos</option>
+<option value="Ave_verum_corpus_Saint-Saens.mid" data-channels="S.A.T.B" data-beat="0">Ave Verum Saint Saens</option>
+<option value="Ecce_vidimus_eum.mid" data-channels="S.A.T.B" data-beat="0">Ecce Vidimus Eum</option>
+<option value="Ave_verum_corpus_Saint-Saens.mid" data-channels="S.A.T.B" data-beat="0">Ave Verum Saint Saens</option>
+<option value="villalobos-rosaamarela.mid" data-channels="S.A.T.B" data-beat="0">Rosa Amarela</option>
