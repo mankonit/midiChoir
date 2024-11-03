@@ -22,7 +22,6 @@
 <option value="ros_canon.mid" data-channels="S.A.T.B">Praetorious - Es Ist Ein Ros (cannon)</option>
 <option value="shchedryk_rev.mid" data-channels="S.A.T.B">Shchedryk</option>
 <option value="Hymne_v1.mid" data-channels="S1.S2.A.T.B">Rheinberger - Hymne</option>
-<option value="mag_ziel.mid" data-channels="S.A.T.B1.B2.solo">Zielinski - Magnificat</option>
 <option value="Victimae_Paschali_Lau_1.mid" data-channels="S.A.T.B.sol">Passaquet - Victimae Paschali Laudes</option>
 <option value="kverno_corpus_christi_carol.mid" data-channels="S.A1.A2.T.B1.B2">Kverno - Corpus Christi Carol</option>
 <option value="vousperdez_crecquillon.mid" data-channels="S.A.T.B">Vous perdez temps</option>
@@ -118,11 +117,9 @@
 <option value="Corsi_Adoramus_te.midi" data-channels="S.A.T.B" data-acc="0">Corsi - Adoramus te</option>
 <option value="Lotti_Crucifixus_a_8.mid" data-channels="S1.S2.A1.A2.T1.T2.B1.B2" data-acc="0">Lotti - Crucifixus a 8</option>
 <option value="Vasks_Pater_noster.mid" data-channels="S.A.T.B" data-acc="0">Vasks - Pater noster</option>
-<option value="Palestrina_Pater_noster_8.mid" data-channels="S1.A1.T1.B1.S2.A2.T2.B2" data-acc="0">Palestrina - Pater Noster a 8</option>
 <option value="Bardos-Eli_Eli.mid" data-channels="S.A.T.B">Bardos - Eli, Eli</option>
 
 <!-- Divers 2020 - 2021 -->
-
 <option value="Janequin_a_ce_joli_moi.mid" data-channels="S.A.T.B">Janequin - Joli mois de mai</option>
 <option value="El_noi_de_la_mare.mid" data-channels="S.A1.A2.T.B1.B2">El noi de la mare</option>
 <option value="petit_garcon.mid" data-channels="S.A.T.B">Petit garcon</option>
@@ -139,3 +136,5 @@
 <option value="Ecce_vidimus_eum.mid" data-channels="S.A.T.B" data-beat="0">Ecce Vidimus Eum</option>
 <option value="Ave_verum_corpus_Saint-Saens.mid" data-channels="S.A.T.B" data-beat="0">Ave Verum Saint Saens</option>
 <option value="villalobos-rosaamarela.mid" data-channels="S.A.T.B" data-beat="0">Rosa Amarela</option>
+
+<option value="Fau_Soir_d_ete.mid" data-channels="S.A.T.B">Soir d'été</option>
