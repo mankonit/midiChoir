@@ -140,6 +140,9 @@
 <option value="Fau_Soir_d_ete.mid" data-channels="S.A.T.B">Soir d'été</option>
 
 <!-- 2024/2025 -->
+<option value="Bruckner_pange_lingua.mid" data-channels="S.A.T.B">Bruckner - Pange lingua</option>
+<option value="Bruckner_Locus-iste.mid" data-channels="S.A.T.B">Bruckner - Locus iste</option>
+<option value="Bruckner_ave-maria.mid" data-channels="S.A.T.B1.B2">Bruckner - Ave maria</option>
 <option value="Palestrina_Pater_noster_8.mid" data-channels="S1.A1.T1.B1.S2.A2.T2.B2" data-acc="0">Palestrina - Pater Noster a 8</option>
 <option value="mag_ziel.mid" data-channels="S.A.T.B1.B2.solo">Zielinski - Magnificat</option>
 <option value="PalestrinaMACM/Palestrina-MassAeternaChristiKyrie.mid" data-channels="S.A.T.B">Palestrina - MACM - Kyrie</option>
@@ -161,3 +164,13 @@
 <option value="Vivaldi-Gloria/Viv-glo09.mid" data-channels="S.A.T.B" data-acc="1">Gloria - 9</option>
 <option value="Vivaldi-Gloria/Viv-glo11.mid" data-channels="S.A.T.B" data-acc="1">Gloria - 11</option>
 <option value="Vivaldi-Gloria/Viv-glo12.mid" data-channels="S.A.T.B" data-acc="1">Gloria - 12</option>
+
+<!-- Cabaret -->
+<option value="Pastime_SATB_143.mid" data-channels="S.A.T.B">Past Time With Good Company</option>
+<option value="Costeley_Noblesse_git.mid" data-channels="S.CT.T.B">Noblesse git</option>
+<option value="tricotea.mid" data-channels="S.A/T.B">La tricotea</option>
+<option value="davids_lamentation.mid" data-channels="S.A.T.B">David's Lamentation</option>
+<option value="Warner/Warner_hearOlord.mid" data-channels="S.A.T.B">Hear O lord</option>
+<option value="Colonel_Cazeilles.mid" data-channels="Ten.Bar.Bas">Colonel Cazeilles</option>
+<option value="Morales_Taedet-Animam-Meam.mid" data-channels="S.A.T.B">Morales - Taedet animam meam</option>
+<option value="Bouzignac_O-mors.mid" data-channels="S.A.T1.T2.B">Bouzignac - O mors</option>
