@@ -6,6 +6,25 @@ const vm = require('node:vm');
 
 const detectSource = fs.readFileSync(path.join(__dirname, '../inc/midi/audioDetect.js'), 'utf8');
 const webAudioSource = fs.readFileSync(path.join(__dirname, '../inc/midi/plugin.webaudio.js'), 'utf8');
+const base64Source = fs.readFileSync(path.join(__dirname, '../inc/shim/Base64binary.js'), 'utf8');
+
+test('decodes Ogg soundfont samples without trailing padding bytes', () => {
+    const context = {};
+    vm.runInNewContext(base64Source, context);
+
+    for (const name of ['electric_piano_1', 'acoustic_grand_piano', 'xylophone']) {
+        const source = fs.readFileSync(path.join(__dirname, '../html/soundfont', name + '-ogg.js'), 'utf8');
+        const samples = [...source.matchAll(/data:audio\/[^,]+,([A-Za-z0-9+/=]+)/g)];
+        assert.ok(samples.length > 0, name + ' has no audio samples');
+
+        for (const [, encoded] of samples) {
+            const actual = Buffer.from(context.Base64Binary.decodeArrayBuffer(encoded));
+            const expected = Buffer.from(encoded, 'base64');
+            assert.deepEqual(actual, expected);
+            assert.equal(actual.subarray(0, 4).toString(), 'OggS');
+        }
+    }
+});
 
 test('uses the advertised Ogg support when mobile audio never reaches canplaythrough', () => {
     let now = 0;
