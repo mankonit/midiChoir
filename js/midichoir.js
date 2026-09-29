@@ -18,6 +18,7 @@ var pitchCorrection = 0;
 
 function startAudio() {
     console.log("start");
+    document.body.classList.add("is-loading");
     $(".starter").css({"display": "none"});
     $(".loader").css({"visibility": "visible"});
     MIDI.loadPlugin({
@@ -38,7 +39,7 @@ function startAudio() {
 
 function loaded() {
     console.log("loaded");
-    
+    document.body.classList.remove("is-loading");
     $(".loader").css({"display": "none"});
     $(".loadable").css({"visibility": "visible"});
     document.getElementById("plugin").innerHTML = "Plugin : " + MIDI.api;

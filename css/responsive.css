@@ -1,7 +1,7 @@
 .midi-choir-page {
     box-sizing: border-box;
     margin: 0;
-    padding: 8px 12px 24px;
+    padding: 8px 12px 112px;
 }
 
 .midi-choir-page .starter {
@@ -117,16 +117,53 @@
 }
 
 .midi-choir-page .infos {
-    position: static;
-    width: auto;
-    margin: 32px auto 0;
-    text-align: center;
+    position: fixed;
+    left: 12px;
+    bottom: max(8px, env(safe-area-inset-bottom));
+    width: max-content;
+    max-width: calc(100vw - 24px);
+    margin: 0;
+    text-align: left;
+    overflow-wrap: anywhere;
 }
 
 .midi-choir-page .infos p {
+    margin: 2px 0;
     line-height: 1.2;
+}
+
+.midi-choir-page.is-loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+    min-height: 100vh;
+    padding-bottom: 120px;
+}
+
+.midi-choir-page.is-loading > :not(.loader):not(.infos) {
+    display: none;
+}
+
+.midi-choir-page.is-loading .loader {
+    position: static;
+    flex: none;
+    margin: 0;
 }
 
 .midi-choir-page .sidenav {
     max-width: 100vw;
+}
+
+@media (max-height: 360px) {
+    .midi-choir-page.is-loading {
+        padding-bottom: 90px;
+    }
+
+    .midi-choir-page.is-loading .loader {
+        width: 80px;
+        height: 80px;
+        border-width: 10px;
+    }
 }
