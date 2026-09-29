@@ -193,7 +193,7 @@ function setBookmark() {
     bookmarkTime = MIDI.Player.currentTime;
     console.log(bookmarkTime);
     $("#bookmark").css({"visibility": "visible"});
-    $("#bookmark").css({"left": 420 * bookmarkTime / MIDI.Player.endTime});
+    $("#bookmark").css({"left": document.getElementById("capsule").clientWidth * bookmarkTime / MIDI.Player.endTime});
 }
 ;
 
@@ -235,7 +235,7 @@ var MIDIPlayerPercentage = function (player) {
             if (wasPlaying)
                 pausePlayStop();
         }
-        player.currentTime = (self.x) / 420 * player.endTime;
+        player.currentTime = self.x / capsule.clientWidth * player.endTime;
         if (player.currentTime < 0)
             player.currentTime = 0;
         if (player.currentTime > player.endTime)

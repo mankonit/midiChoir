@@ -1,0 +1,132 @@
+.midi-choir-page {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 8px 12px 24px;
+}
+
+.midi-choir-page .starter {
+    display: block;
+    position: static;
+    margin: 16px auto;
+}
+
+.midi-choir-page .top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 48px;
+}
+
+.midi-choir-page .help,
+.midi-choir-page .params {
+    position: static;
+    margin: 0;
+}
+
+.midi-choir-page .center {
+    margin: 16px 0;
+}
+
+.midi-choir-page select {
+    box-sizing: border-box;
+    max-width: 100%;
+}
+
+.midi-choir-page .player {
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 612px;
+    height: auto;
+    margin: 0 auto;
+}
+
+.midi-choir-page .player .time-controls {
+    display: grid;
+    grid-template-columns: minmax(45px, auto) minmax(0, 1fr) minmax(45px, auto);
+    align-items: center;
+    gap: 6px;
+    width: 100%;
+}
+
+.midi-choir-page .player span.time {
+    top: 0;
+    width: auto;
+    padding: 0;
+    white-space: nowrap;
+}
+
+.midi-choir-page .player #capsule {
+    box-sizing: border-box;
+    display: block;
+    width: 100%;
+    min-width: 0;
+    touch-action: none;
+}
+
+.midi-choir-page .player .play-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    gap: 8px;
+}
+
+.midi-choir-page .player .play-buttons input {
+    box-sizing: border-box;
+    width: 44px;
+    height: 44px;
+    margin: 0;
+    object-fit: contain;
+}
+
+.midi-choir-page #tempoSlideDiv,
+.midi-choir-page #pitchSlideDiv,
+.midi-choir-page #playBeatDiv,
+.midi-choir-page #playAccDiv {
+    min-width: 0;
+}
+
+.midi-choir-page #tempoSlideDiv,
+.midi-choir-page #pitchSlideDiv {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+}
+
+.midi-choir-page #tempoSlide,
+.midi-choir-page #pitchSlide {
+    flex: 1 1 120px;
+    min-width: 90px;
+    max-width: 320px;
+}
+
+.midi-choir-page #SATBButtonsDiv div {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    min-width: 0;
+    margin: 8px 0;
+}
+
+.midi-choir-page #SATBButtonsDiv button {
+    margin: 0;
+    min-height: 44px;
+}
+
+.midi-choir-page .infos {
+    position: static;
+    width: auto;
+    margin: 32px auto 0;
+    text-align: center;
+}
+
+.midi-choir-page .infos p {
+    line-height: 1.2;
+}
+
+.midi-choir-page .sidenav {
+    max-width: 100vw;
+}
