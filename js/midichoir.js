@@ -18,13 +18,15 @@ var pitchCorrection = 0;
 
 function startAudio() {
     console.log("start");
+    // Firefox for Android rejects some Ogg soundfont samples during decoding.
+    var useMp3 = /Android/i.test(navigator.userAgent) && /Firefox|Fennec/i.test(navigator.userAgent);
     document.body.classList.add("is-loading");
     $(".starter").css({"display": "none"});
     $(".loader").css({"visibility": "visible"});
     MIDI.loadPlugin({
         soundfontUrl: "./soundfont/",
         instruments: ["electric_piano_1", "acoustic_grand_piano", "xylophone"],
-        //targetFormat: 'mp3', // mp3 / ogg
+        targetFormat: useMp3 ? 'mp3' : undefined,
         api: 'webaudio', // audiotag / webmidi / webaudio
         onprogress: function (state, progress) {
             console.log(state, progress);

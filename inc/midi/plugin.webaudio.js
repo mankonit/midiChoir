@@ -274,6 +274,7 @@
 							waitForEnd(instrument);
 						}
 					}, function(err) {
+						console.error('Audio sample decode failed', instrumentId, key, err);
 						fail(err);
 					});
 				}
