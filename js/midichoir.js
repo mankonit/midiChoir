@@ -32,6 +32,13 @@ function startAudio() {
         },
         onsuccess: function () {
             loaded();
+        },
+        onerror: function (error) {
+            console.error("Audio loading failed", error);
+            document.body.classList.remove("is-loading");
+            $(".loader").css({"visibility": "hidden"});
+            $(".starter").css({"display": "block"});
+            document.getElementById("message").textContent = "Chargement audio impossible. Réessayez ou utilisez un autre navigateur.";
         }
     });
 }

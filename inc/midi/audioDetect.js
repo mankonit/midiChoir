@@ -66,6 +66,10 @@ if (typeof MIDI === 'undefined') MIDI = {};
 		vorbis = (vorbis === 'probably' || vorbis === 'maybe');
 		var mpeg = audio.canPlayType('audio/mpeg');
 		mpeg = (mpeg === 'probably' || mpeg === 'maybe');
+		// Mobile browsers may not fire canplaythrough for an unplayed data URL.
+		// Keep the codec result unless playback reports an actual error.
+		supports['audio/ogg'] = vorbis;
+		supports['audio/mpeg'] = mpeg;
 		// maybe nothing is supported
 		if (!vorbis && !mpeg) {
 			onsuccess(supports);

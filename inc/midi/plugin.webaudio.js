@@ -217,7 +217,7 @@
 
 		midi.connect = function(opts) {
 			root.setDefaultPlugin(midi);
-			midi.setContext(ctx || createAudioContext(), opts.onsuccess);
+			midi.setContext(ctx || createAudioContext(), opts.onsuccess, opts.onprogress, opts.onerror);
 		};
 	
 		midi.getContext = function() {
@@ -227,7 +227,7 @@
 		midi.setContext = function(newCtx, onload, onprogress, onerror) {
 			ctx = newCtx;
 			masterGain = ctx.createGain();
-			masterGain.gain.value = 0.8;
+			masterGain.gain.value = 1.0;
 			masterGain.connect(ctx.destination);
 
 			/// tuna.js effects module - https://github.com/Dinahmoe/tuna
@@ -240,7 +240,14 @@
 			var notes = root.keyToNote;
 			for (var key in notes) urls.push(key);
 			///
+			var failed = false;
+			var fail = function(error) {
+				if (failed) return;
+				failed = true;
+				if (onerror) onerror(error);
+			};
 			var waitForEnd = function(instrument) {
+				if (failed) return;
 				for (var key in bufferPending) { // has pending items
 					if (bufferPending[key]) return;
 				}
@@ -267,7 +274,7 @@
 							waitForEnd(instrument);
 						}
 					}, function(err) {
-		// 				console.log(err);
+						fail(err);
 					});
 				}
 			};
