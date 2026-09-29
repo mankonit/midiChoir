@@ -244,7 +244,7 @@
 			var fail = function(error) {
 				if (failed) return;
 				failed = true;
-				if (onerror) onerror(error);
+				if (onerror) onerror(error, 'decode');
 			};
 			var waitForEnd = function(instrument) {
 				if (failed) return;
@@ -259,10 +259,12 @@
 			};
 			///
 			var requestAudio = function(soundfont, instrumentId, index, key) {
+				if (failed) return;
 				var url = soundfont[key];
 				if (url) {
 					bufferPending[instrumentId] ++;
 					loadAudio(url, function(buffer) {
+						if (failed) return;
 						buffer.id = key;
 						var noteId = root.keyToNote[key];
 						audioBuffers[instrumentId + '' + noteId] = buffer;
@@ -274,7 +276,7 @@
 							waitForEnd(instrument);
 						}
 					}, function(err) {
-						console.error('Audio sample decode failed', instrumentId, key, err);
+						if (!failed) console.error('Audio sample decode failed', instrumentId, key, err);
 						fail(err);
 					});
 				}
@@ -301,6 +303,26 @@
 			setTimeout(waitForEnd, 1);
 		};
 
+		function decodeAudio(buffer, onload, onerror) {
+			var settled = false;
+			var success = function(decoded) {
+				if (settled) return;
+				settled = true;
+				onload(decoded);
+			};
+			var failure = function(error) {
+				if (settled) return;
+				settled = true;
+				onerror(error);
+			};
+			try {
+				var promise = ctx.decodeAudioData(buffer, success, failure);
+				if (promise && typeof promise.catch === 'function') promise.catch(failure);
+			} catch (error) {
+				failure(error);
+			}
+		};
+
 		/* Load audio file: streaming | base64 | arraybuffer
 		---------------------------------------------------------------------- */
 		function loadAudio(url, onload, onerror) {
@@ -320,13 +342,13 @@
 			} else if (url.indexOf('data:audio') === 0) { // Base64 string
 				var base64 = url.split(',')[1];
 				var buffer = Base64Binary.decodeArrayBuffer(base64);
-				ctx.decodeAudioData(buffer, onload, onerror);
+				decodeAudio(buffer, onload, onerror);
 			} else { // XMLHTTP buffer
 				var request = new XMLHttpRequest();
 				request.open('GET', url, true);
 				request.responseType = 'arraybuffer';
 				request.onload = function() {
-					ctx.decodeAudioData(request.response, onload, onerror);
+					decodeAudio(request.response, onload, onerror);
 				};
 				request.send();
 			}

@@ -42,6 +42,8 @@ MIDI.Player = MIDI.Player || {};
 		}
 
 		root.soundfontUrl = opts.soundfontUrl || root.soundfontUrl;
+		var originalOnError = opts.onerror;
+		var retriedMp3 = false;
 
 		/// Detect the best type of audio to use
 		root.audioDetect(function(supports) {
@@ -73,6 +75,26 @@ MIDI.Player = MIDI.Player || {};
 				root.__api = api;
 				root.__audioFormat = audioFormat;
 				root.supports = supports;
+				opts.onerror = function(error, stage) {
+					if (stage === 'decode' && api === 'webaudio' && audioFormat === 'ogg' && !retriedMp3) {
+						retriedMp3 = true;
+						// Remove decoded Ogg samples and cached soundfonts before the MP3 retry.
+						var buffers = root.WebAudio.audioBuffers;
+						for (var i = 0; i < opts.instruments.length; i++) {
+							var instrumentId = opts.instruments[i];
+							delete root.Soundfont[instrumentId];
+							var program = root.GM.byName[instrumentId].number;
+							for (var note in root.keyToNote) {
+								delete buffers[program + '' + root.keyToNote[note]];
+							}
+						}
+						root.__audioFormat = 'mp3';
+						if (opts.onprogress) opts.onprogress('retry', 0);
+						root.loadResource(opts);
+					} else if (originalOnError) {
+						originalOnError(error);
+					}
+				};
 				root.loadResource(opts);
 			}
 		});
