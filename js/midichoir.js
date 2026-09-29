@@ -230,16 +230,17 @@ var MIDIPlayerPercentage = function (player) {
     //
     eventjs.add(capsule, "drag", function (event, self) {
         eventjs.cancel(event);
+        if (self.state === "down") {
+            wasPlaying = player.playing;
+            if (wasPlaying)
+                pausePlayStop();
+        }
         player.currentTime = (self.x) / 420 * player.endTime;
         if (player.currentTime < 0)
             player.currentTime = 0;
         if (player.currentTime > player.endTime)
             player.currentTime = player.endTime;
-        if (self.state === "down") {
-            wasPlaying = player.playing;
-            if (wasPlaying)
-                pausePlayStop();
-        } else if (self.state === "up" && wasPlaying) {
+        if (self.state === "up" && wasPlaying) {
             pausePlayStop();
         }
     });

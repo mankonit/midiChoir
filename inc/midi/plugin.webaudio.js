@@ -14,7 +14,7 @@
 		var midi = root.WebAudio = {api: 'webaudio'};
 		var ctx; // audio context
 		var sources = {};
-		var effects = {};
+		var masterGain;
 		var audioBuffers = {};
 		var pitch = 0;
 		///
@@ -90,24 +90,13 @@
 				source.buffer = buffer;
 			}
 
-			/// add effects to buffer
-			if (effects) {
-				var chain = source;
-				for (var key in effects) {
-					chain.connect(effects[key].input);
-					chain = effects[key];
-				}
-			}
-
 			/// add gain + pitchShift
-			var channel = root.channels[channelId];
-			var gain = ((velocity / 127) * (channel.volume / 127) * 2) - 1;
-			source.connect(ctx.destination);
-			source.playbackRate.value = 1+pitch; // pitch shift 
+			var gain = (velocity / 127) * (channel.volume / 127);
+			source.playbackRate.value = 1 + pitch; // pitch shift
 			source.gainNode = ctx.createGain(); // gain
-			source.gainNode.connect(ctx.destination);
-			source.gainNode.gain.value = Math.min(1.0, Math.max(-1.0, gain));
+			source.gainNode.gain.value = Math.min(1.0, Math.max(0.0, gain));
 			source.connect(source.gainNode);
+			source.gainNode.connect(masterGain);
 			///
 			if (useStreamingBuffer) {
 				if (delay) {
@@ -148,8 +137,8 @@
 						// a 'release' parameter for ADSR like time settings.'
 						// add { 'metadata': { release: 0.3 } } to soundfont files
 						var gain = source.gainNode.gain;
-						gain.linearRampToValueAtTime(gain.value, delay);
-						gain.linearRampToValueAtTime(-1.0, delay + 0.3);
+						gain.setValueAtTime(gain.value, delay);
+						gain.linearRampToValueAtTime(0, delay + 0.3);
 					}
 					///
 					if (useStreamingBuffer) {
@@ -198,8 +187,9 @@
 					delay += ctx.currentTime;
 				}
 				var source = sources[sid];
-				source.gain.linearRampToValueAtTime(1, delay);
-				source.gain.linearRampToValueAtTime(0, delay + 0.3);
+				var gain = source.gainNode.gain;
+				gain.setValueAtTime(gain.value, delay);
+				gain.linearRampToValueAtTime(0, delay + 0.3);
 				if (source.noteOff) { // old api
 					source.noteOff(delay + 0.3);
 				} else { // new api
@@ -211,12 +201,15 @@
 
 		midi.setEffects = function(list) {
 			if (ctx.tunajs) {
+				masterGain.disconnect();
+				var chain = masterGain;
 				for (var n = 0; n < list.length; n ++) {
 					var data = list[n];
 					var effect = new ctx.tunajs[data.type](data);
-					effect.connect(ctx.destination);
-					effects[data.type] = effect;
+					chain.connect(effect.input);
+					chain = effect;
 				}
+				chain.connect(ctx.destination);
 			} else {
 				return console.log('Effects module not installed.');
 			}
@@ -233,6 +226,9 @@
 	
 		midi.setContext = function(newCtx, onload, onprogress, onerror) {
 			ctx = newCtx;
+			masterGain = ctx.createGain();
+			masterGain.gain.value = 0.8;
+			masterGain.connect(ctx.destination);
 
 			/// tuna.js effects module - https://github.com/Dinahmoe/tuna
 			if (typeof Tuna !== 'undefined' && !ctx.tunajs) {
