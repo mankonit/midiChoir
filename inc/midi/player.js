@@ -110,12 +110,17 @@ midi.loadMidiFile = function(onsuccess, onprogress, onerror) {
 		midi.data = midi.replayer.getData();
 		buildTimeline();
 		///
-		MIDI.loadPlugin({
+		var piano = MIDI.Soundfont && MIDI.Soundfont.acoustic_grand_piano;
+		if (MIDI.api === 'webaudio' && piano && piano.isLoaded) {
+			onsuccess && onsuccess();
+		} else {
+			MIDI.loadPlugin({
 // 			instruments: midi.getFileInstruments(),
-			onsuccess: onsuccess,
-			onprogress: onprogress,
-			onerror: onerror
-		});
+				onsuccess: onsuccess,
+				onprogress: onprogress,
+				onerror: onerror
+			});
+		}
 	} catch(event) {
 		onerror && onerror(event);
 	}

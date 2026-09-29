@@ -6,18 +6,20 @@ const vm = require('node:vm');
 
 const playerSource = fs.readFileSync(path.join(__dirname, '../inc/midi/player.js'), 'utf8');
 
-function createPlayer(events) {
+function createPlayer(events, soundfontReady = false) {
     let currentTime = 0;
     let nextIntervalId = 1;
     const intervals = new Map();
     const calls = [];
     const sources = [];
+    let pluginLoads = 0;
     const context = { get currentTime() { return currentTime; } };
     const midi = {
         api: 'webaudio',
+        Soundfont: soundfontReady ? { acoustic_grand_piano: { isLoaded: true } } : {},
         channels: [{ mute: false }],
         WebAudio: { getContext: () => context },
-        loadPlugin: ({ onsuccess }) => onsuccess(),
+        loadPlugin: ({ onsuccess }) => { pluginLoads++; if (onsuccess) onsuccess(); },
         setController: () => {},
         programChange: () => {},
         pitchBend: () => {},
@@ -60,12 +62,21 @@ function createPlayer(events) {
         calls,
         sources,
         intervals,
+        get pluginLoads() { return pluginLoads; },
         tick(seconds) {
             currentTime = seconds;
             for (const callback of [...intervals.values()]) callback();
         }
     };
 }
+
+test('starts a new MIDI track without reloading an already decoded soundfont', () => {
+    const harness = createPlayer([], true);
+    let started = false;
+    harness.player.loadMidiFile(() => { started = true; });
+    assert.equal(started, true);
+    assert.equal(harness.pluginLoads, 0);
+});
 
 test('schedules each event once in a bounded lookahead window', () => {
     const harness = createPlayer([
