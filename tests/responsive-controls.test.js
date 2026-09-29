@@ -51,5 +51,5 @@ test('seeking and bookmarks use the current progress bar width', () => {
     drag({}, { state: 'move', x: 75 });
     assert.equal(player.currentTime, 25);
     context.setBookmark();
-    assert.equal(bookmark.style.left, 75);
+    assert.equal(bookmark.style.left, '25%');
 });

@@ -193,7 +193,7 @@ function setBookmark() {
     bookmarkTime = MIDI.Player.currentTime;
     console.log(bookmarkTime);
     $("#bookmark").css({"visibility": "visible"});
-    $("#bookmark").css({"left": document.getElementById("capsule").clientWidth * bookmarkTime / MIDI.Player.endTime});
+    $("#bookmark").css({"left": (bookmarkTime / MIDI.Player.endTime * 100) + "%"});
 }
 ;
 

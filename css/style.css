@@ -29,6 +29,7 @@
         
 }
 .player #capsule {
+    position: relative;
     border: 1px solid #000;
     box-shadow: 0 0 10px #555;
     -moz-box-shadow: 0 0 10px #555;
@@ -70,10 +71,11 @@
     background: red;
     width: 2px;
     height: 100%;
-    top : -35px;
-    left: 20px;
+    top: 0;
+    left: 0;
+    transform: translateX(-50%);
     z-index: 2;
-    position: relative;
+    position: absolute;
     display: block;
     visibility: hidden;
 }
