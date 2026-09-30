@@ -1,7 +1,11 @@
 .midi-choir-page {
     box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
     margin: 0;
-    padding: 8px 12px 112px;
+    min-height: 100vh;
+    min-height: 100dvh;
+    padding: 8px 12px max(12px, env(safe-area-inset-bottom));
 }
 
 .midi-choir-page .starter {
@@ -120,12 +124,11 @@
 }
 
 .midi-choir-page .infos {
-    position: fixed;
-    left: 12px;
-    bottom: max(8px, env(safe-area-inset-bottom));
+    position: static;
     width: max-content;
-    max-width: calc(100vw - 24px);
-    margin: 0;
+    max-width: 100%;
+    margin: auto 0 0;
+    padding-top: 24px;
     text-align: left;
     overflow-wrap: anywhere;
 }
@@ -136,13 +139,9 @@
 }
 
 .midi-choir-page.is-loading {
-    display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: 24px;
-    min-height: 100vh;
-    padding-bottom: 120px;
 }
 
 .midi-choir-page.is-loading > :not(.loader):not(.infos) {
@@ -155,15 +154,19 @@
     margin: 0;
 }
 
+.midi-choir-page.is-loading .infos {
+    position: fixed;
+    left: 12px;
+    bottom: max(8px, env(safe-area-inset-bottom));
+    margin: 0;
+    padding: 0;
+}
+
 .midi-choir-page .sidenav {
     max-width: 100vw;
 }
 
 @media (max-height: 360px) {
-    .midi-choir-page.is-loading {
-        padding-bottom: 90px;
-    }
-
     .midi-choir-page.is-loading .loader {
         width: 80px;
         height: 80px;
