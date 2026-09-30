@@ -29,14 +29,46 @@ test('changes the master gain immediately and keeps it when the audio context ch
     assert.equal(gains[0].gain.value, 1);
     midi.WebAudio.setMasterVolume(0.4);
     assert.equal(gains[0].gain.value, 0.4);
-    midi.WebAudio.setMasterVolume(1.2);
-    assert.equal(gains[0].gain.value, 1.2);
-    midi.WebAudio.setMasterVolume(2);
-    assert.equal(gains[0].gain.value, 1.2);
+    midi.WebAudio.setMasterVolume(3);
+    assert.equal(gains[0].gain.value, 3);
+    midi.WebAudio.setMasterVolume(4);
+    assert.equal(gains[0].gain.value, 3);
     midi.WebAudio.setMasterVolume(0);
     assert.equal(gains[0].gain.value, 0);
     midi.WebAudio.setContext(audioContext);
     assert.equal(gains[1].gain.value, 0);
+});
+
+test('routes boosted audio through a peak limiter', () => {
+    let gainNode;
+    let limiter;
+    const audioContext = {
+        destination: {},
+        createGain() {
+            gainNode = { gain: {}, connect(target) { this.output = target; } };
+            return gainNode;
+        },
+        createDynamicsCompressor() {
+            limiter = {
+                threshold: {}, knee: {}, ratio: {}, attack: {}, release: {},
+                connect(target) { this.output = target; }
+            };
+            return limiter;
+        }
+    };
+    const midi = { keyToNote: {}, Soundfont: {} };
+    vm.runInNewContext(webAudioSource, {
+        MIDI: midi,
+        window: { AudioContext: function () {} },
+        setTimeout() {}
+    });
+
+    midi.WebAudio.setContext(audioContext);
+    midi.WebAudio.setMasterVolume(3);
+    assert.equal(gainNode.output, limiter);
+    assert.equal(limiter.output, audioContext.destination);
+    assert.equal(gainNode.gain.value, 3);
+    assert.equal(limiter.ratio.value, 20);
 });
 const base64Source = fs.readFileSync(path.join(__dirname, '../inc/shim/Base64binary.js'), 'utf8');
 

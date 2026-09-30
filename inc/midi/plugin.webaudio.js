@@ -15,6 +15,7 @@
 		var ctx; // audio context
 		var sources = {};
 		var masterGain;
+		var masterLimiter;
 		var masterVolume = 1.0;
 		var audioBuffers = {};
 		var pitch = 0;
@@ -22,7 +23,7 @@
 		midi.audioBuffers = audioBuffers;
 		midi.send = function(data, delay) { };
 		midi.setMasterVolume = function(volume) {
-			masterVolume = Math.min(1.2, Math.max(0, Number(volume)));
+			masterVolume = Math.min(3, Math.max(0, Number(volume)));
 			if (masterGain) masterGain.gain.value = masterVolume;
 		};
 		midi.setController = function(channelId, type, value, delay) {
@@ -214,7 +215,7 @@
 					chain.connect(effect.input);
 					chain = effect;
 				}
-				chain.connect(ctx.destination);
+				chain.connect(masterLimiter || ctx.destination);
 			} else {
 				return console.log('Effects module not installed.');
 			}
@@ -233,7 +234,18 @@
 			ctx = newCtx;
 			masterGain = ctx.createGain();
 			masterGain.gain.value = masterVolume;
-			masterGain.connect(ctx.destination);
+			masterLimiter = ctx.createDynamicsCompressor && ctx.createDynamicsCompressor();
+			if (masterLimiter) {
+				masterLimiter.threshold.value = -1.5;
+				masterLimiter.knee.value = 0;
+				masterLimiter.ratio.value = 20;
+				masterLimiter.attack.value = 0.003;
+				masterLimiter.release.value = 0.25;
+				masterGain.connect(masterLimiter);
+				masterLimiter.connect(ctx.destination);
+			} else {
+				masterGain.connect(ctx.destination);
+			}
 
 			/// tuna.js effects module - https://github.com/Dinahmoe/tuna
 			if (typeof Tuna !== 'undefined' && !ctx.tunajs) {
