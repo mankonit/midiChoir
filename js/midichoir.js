@@ -19,7 +19,7 @@ var pitchCorrection = 0;
 function updateVolume(value) {
     var volume = Math.min(100, Math.max(0, Number(value)));
     document.getElementById("volumeValue").textContent = volume + "%";
-    MIDI.WebAudio.setMasterVolume(volume / 100);
+    MIDI.WebAudio.setMasterVolume(volume * 1.2 / 100);
 }
 
 function startAudio() {
@@ -51,6 +51,7 @@ function startAudio() {
 
 function loaded() {
     console.log("loaded");
+    updateVolume(document.getElementById("volumeSlide").value);
     document.body.classList.remove("is-loading");
     $(".loader").css({"display": "none"});
     $(".loadable").css({"visibility": "visible"});

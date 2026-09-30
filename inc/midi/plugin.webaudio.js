@@ -22,7 +22,7 @@
 		midi.audioBuffers = audioBuffers;
 		midi.send = function(data, delay) { };
 		midi.setMasterVolume = function(volume) {
-			masterVolume = Math.min(1, Math.max(0, Number(volume)));
+			masterVolume = Math.min(1.2, Math.max(0, Number(volume)));
 			if (masterGain) masterGain.gain.value = masterVolume;
 		};
 		midi.setController = function(channelId, type, value, delay) {

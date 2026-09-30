@@ -29,6 +29,10 @@ test('changes the master gain immediately and keeps it when the audio context ch
     assert.equal(gains[0].gain.value, 1);
     midi.WebAudio.setMasterVolume(0.4);
     assert.equal(gains[0].gain.value, 0.4);
+    midi.WebAudio.setMasterVolume(1.2);
+    assert.equal(gains[0].gain.value, 1.2);
+    midi.WebAudio.setMasterVolume(2);
+    assert.equal(gains[0].gain.value, 1.2);
     midi.WebAudio.setMasterVolume(0);
     assert.equal(gains[0].gain.value, 0);
     midi.WebAudio.setContext(audioContext);
