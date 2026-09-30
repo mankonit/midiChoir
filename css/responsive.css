@@ -80,6 +80,7 @@
 }
 
 .midi-choir-page #tempoSlideDiv,
+.midi-choir-page #volumeDiv,
 .midi-choir-page #pitchSlideDiv,
 .midi-choir-page #playBeatDiv,
 .midi-choir-page #playAccDiv {
@@ -87,6 +88,7 @@
 }
 
 .midi-choir-page #tempoSlideDiv,
+.midi-choir-page #volumeDiv,
 .midi-choir-page #pitchSlideDiv {
     display: flex;
     flex-wrap: wrap;
@@ -96,6 +98,7 @@
 }
 
 .midi-choir-page #tempoSlide,
+.midi-choir-page #volumeSlide,
 .midi-choir-page #pitchSlide {
     flex: 1 1 120px;
     min-width: 90px;

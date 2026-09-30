@@ -16,6 +16,12 @@ var setId;
 var tempoCorrection = 0;
 var pitchCorrection = 0;
 
+function updateVolume(value) {
+    var volume = Math.min(100, Math.max(0, Number(value)));
+    document.getElementById("volumeValue").textContent = volume + "%";
+    MIDI.WebAudio.setMasterVolume(volume / 100);
+}
+
 function startAudio() {
     console.log("start");
     document.body.classList.add("is-loading");

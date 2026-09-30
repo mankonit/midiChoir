@@ -15,11 +15,16 @@
 		var ctx; // audio context
 		var sources = {};
 		var masterGain;
+		var masterVolume = 1.0;
 		var audioBuffers = {};
 		var pitch = 0;
 		///
 		midi.audioBuffers = audioBuffers;
 		midi.send = function(data, delay) { };
+		midi.setMasterVolume = function(volume) {
+			masterVolume = Math.min(1, Math.max(0, Number(volume)));
+			if (masterGain) masterGain.gain.value = masterVolume;
+		};
 		midi.setController = function(channelId, type, value, delay) {
 			if(type == 7) root.setVolume(channelId, value, delay);
 		};
@@ -227,7 +232,7 @@
 		midi.setContext = function(newCtx, onload, onprogress, onerror) {
 			ctx = newCtx;
 			masterGain = ctx.createGain();
-			masterGain.gain.value = 1.0;
+			masterGain.gain.value = masterVolume;
 			masterGain.connect(ctx.destination);
 
 			/// tuna.js effects module - https://github.com/Dinahmoe/tuna

@@ -7,6 +7,33 @@ const vm = require('node:vm');
 const detectSource = fs.readFileSync(path.join(__dirname, '../inc/midi/audioDetect.js'), 'utf8');
 const webAudioSource = fs.readFileSync(path.join(__dirname, '../inc/midi/plugin.webaudio.js'), 'utf8');
 const loaderSource = fs.readFileSync(path.join(__dirname, '../inc/midi/loader.js'), 'utf8');
+
+test('changes the master gain immediately and keeps it when the audio context changes', () => {
+    const gains = [];
+    const audioContext = {
+        destination: {},
+        createGain() {
+            const node = { gain: {}, connect() {} };
+            gains.push(node);
+            return node;
+        }
+    };
+    const midi = { keyToNote: {}, Soundfont: {} };
+    vm.runInNewContext(webAudioSource, {
+        MIDI: midi,
+        window: { AudioContext: function () {} },
+        setTimeout() {}
+    });
+
+    midi.WebAudio.setContext(audioContext);
+    assert.equal(gains[0].gain.value, 1);
+    midi.WebAudio.setMasterVolume(0.4);
+    assert.equal(gains[0].gain.value, 0.4);
+    midi.WebAudio.setMasterVolume(0);
+    assert.equal(gains[0].gain.value, 0);
+    midi.WebAudio.setContext(audioContext);
+    assert.equal(gains[1].gain.value, 0);
+});
 const base64Source = fs.readFileSync(path.join(__dirname, '../inc/shim/Base64binary.js'), 'utf8');
 
 test('decodes Ogg soundfont samples without trailing padding bytes', () => {
